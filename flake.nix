@@ -21,15 +21,13 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             bun
-            # nodejs_22
-            typescript-language-server
-            vscode-langservers-extracted
           ];
 
           shellHook = ''
+            export PATH="$PWD/node_modules/.bin:$PATH"
             echo "Dev Shell"
             echo "Run 'bun install' to start."
-            echo "Run 'bun run dev' to start the server."
+            echo "Run 'bun dev' to start the server."
           '';
         };
       }
