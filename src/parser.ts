@@ -46,22 +46,33 @@ const STATS_PREFIXES_COMPLEX = [
     key: "average_points" as keyof ExamStats,
   },
 ];
-
-// Utility to parse German-formatted numbers (so , instead of .).
+/**
+ * Utility to parse German-formatted numbers (so , instead of .).
+ * @param input
+ * @returns
+ */
 function parseGermanFloat(input: string): number | null {
   const normalized = input.replace(",", ".").trim();
   const parsed = parseFloat(normalized);
   return isNaN(parsed) ? null : parsed;
 }
 
-// clean up strings from crazy html formatting, like tabs and newlines
+/**
+ * clean up strings from crazy html formatting, like tabs and newlines
+ * @param input
+ * @returns the input string without any duplicate spaces or tabs and newlines
+ */
 function cleanupString(input: string): string {
   return input.replace(/\s+/g, " ").trim();
 }
 
-// retrieves all non-empty text nodes from an element.
-function getTextTokens(element: Element): string[] {
-  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+/**
+ * retrieves all non-empty text nodes from an element.
+ * @param rootElement the root element to create the walker on
+ * @returns an array of strings with all the text inside of the root element
+ */
+function getTextTokens(rootElement: Element): string[] {
+  const walker = document.createTreeWalker(rootElement, NodeFilter.SHOW_TEXT);
   const tokens: string[] = [];
   let node: Node | null;
 
@@ -75,6 +86,11 @@ function getTextTokens(element: Element): string[] {
   return tokens;
 }
 
+/**
+ * Extracs all the lecture stats from the FlexNow HTML page
+ * @param htmlContent the html page exported from FlexNow
+ * @returns an array of `Lecture[]` objects with the parsed data
+ */
 export function extractLecturesFromHtml(htmlContent: string): Lecture[] {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlContent, "text/html");
@@ -98,8 +114,11 @@ export function extractLecturesFromHtml(htmlContent: string): Lecture[] {
   return final;
 }
 
-// Parses a single lecture LI element.
-// Returns null if the nodes structure is invalid.
+/**
+ * Parses a single raw lecture element.
+ * @param lectureNode - The DOM node containing the lecture data
+ * @returns a Lecture object with the parsed in data or null if the nodes structure is invalid
+ */
 function parseLecture(lectureNode: Element): Lecture | null {
   const nameSpan = lectureNode.querySelector("span");
   if (!nameSpan || !nameSpan.textContent) {
