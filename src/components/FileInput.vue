@@ -1,3 +1,12 @@
+<script lang="ts">
+/**
+ * HTML file input to upload the file "`FlexNow Studentenschnittstelle.html`"
+ *
+ * @emits lectures-loaded - propagates the new `Lecture[]` list and needs to be handled in the parent component
+ */
+export default {};
+</script>
+
 <script setup lang="ts">
 import { ref } from "vue";
 import { extractLecturesFromHtml, type Lecture } from "../parser";

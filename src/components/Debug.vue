@@ -1,3 +1,11 @@
+<script lang="ts">
+/**
+ * renders a list of lectures as formatted JSON
+ * @prop {Lecture[]} lectures - the lectures to render
+ */
+export default {};
+</script>
+
 <script setup lang="ts">
 import type { Lecture } from "../parser";
 
