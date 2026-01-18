@@ -22,8 +22,7 @@ export interface Lecture {
   stats: ExamStats;
 }
 
-// Maps prefix strings found in HTML to the corresponding ExamStats key.
-// Used to avoid massive if/else chains.
+// maps prefix strings found in HTML to the corresponding ExamStats key.
 const STATS_MAP: Record<string, keyof ExamStats> = {
   "Anmeldungen:": "participants",
   "davon noch nicht bewertet:": "not_yet_graded",
@@ -33,10 +32,10 @@ const STATS_MAP: Record<string, keyof ExamStats> = {
   "davon sonstige:": "other",
   "Median:": "median_grade",
   "Standardabweichung:": "standard_deviation_grade",
-  // Some prefixes are long/complex, we handle those via partial matches or normalization below
+  // some prefixes are long/complex, we handle those via partial matches or normalization below
 };
 
-// Special handling for the long/complex prefixes
+// special handling for the long/complex prefixes
 const STATS_PREFIXES_COMPLEX = [
   {
     prefix: "∅ Note aus den Ergebnissen",
@@ -165,7 +164,7 @@ function parseLecture(lectureNode: Element): Lecture | null {
 
   // parse properties (tokens)
   const tokens = getTextTokens(propertyContainer);
-  // console.log(tokens);
+  console.log("tokens:", tokens);
 
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
@@ -174,34 +173,41 @@ function parseLecture(lectureNode: Element): Lecture | null {
       continue;
     }
 
-    // if (token === "Note:") {
-    //   const nextToken = tokens[i + 1];
-    //   if (nextToken) {
-    //     lecture.grade = parseGermanFloat(nextToken);
-    //     i++; // Skip next token since we consumed it
-    //   }
-    //   continue;
-    // }
+    if (token === "Note:") {
+      const nextToken = tokens[i + 1];
+      if (nextToken) {
+        lecture.grade = parseGermanFloat(nextToken);
+        i++; // skip the next token since we consumed it
+      }
+      continue;
+    }
 
     if (token.endsWith("Bestanden")) {
       lecture.passed = true;
       continue;
     }
 
-    if (token.startsWith("ECTS:")) {
-      const val = token.replace("ECTS:", "");
-      lecture.ects = parseGermanFloat(val);
+    // if (token.includes("ECTS:")) {
+    //   // const val = token.split("ECTS:").at(1)?.trim(); // needs target es2022
+    //   const val = token.split("ECTS:");
+    //   lecture.ects = parseGermanFloat(val[1]!); // no need to trim, handled in parseGerFloat
+    //   continue;
+    // }
+    if (token.includes("ECTS:")) {
+      const search = "ECTS:";
+      const val = token.substring(token.lastIndexOf(search) + search.length);
+      lecture.ects = parseGermanFloat(val); // no need to trim, handled in parseGerFloat
       continue;
     }
 
     // handles "(5.0 Punkte)" or "5,0 Punkte"
     if (token.includes("Punkte")) {
-      const val = token.replace("Punkte", "").replace(/[()]/g, ""); // Remove 'Punkte', '(', ')'
+      // remove 'Punkte', '(', ')'
+      const val = token.replace("Punkte", "").replace(/[()]/g, "");
       lecture.points = parseGermanFloat(val);
       continue;
     }
 
-    // Check exact prefix matches from the map
     if (token.includes("Keine Statistik vorhanden")) {
       lecture.noStats = true;
       continue;
@@ -211,6 +217,7 @@ function parseLecture(lectureNode: Element): Lecture | null {
     // but it doesnt hurt to check anyways if the flexnow data format changes
     if (lecture.noStats) continue;
 
+    // check exact prefix matches from the map
     let statFound = false;
     for (const [prefix, key] of Object.entries(STATS_MAP)) {
       if (token.startsWith(prefix)) {
@@ -223,10 +230,10 @@ function parseLecture(lectureNode: Element): Lecture | null {
     }
     if (statFound) continue;
 
-    // Check complex prefixes
+    // check complex prefixes
     for (const { prefix, key } of STATS_PREFIXES_COMPLEX) {
       if (token.startsWith(prefix)) {
-        // The value is usually after the colon at the end of the long string
+        // the value is usually after the colon at the end of the long string
         const parts = token.split(":");
         if (parts.length > 1) {
           const value = parts[parts.length - 1];
