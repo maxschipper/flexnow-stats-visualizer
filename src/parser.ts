@@ -210,12 +210,12 @@ function parseLecture(lectureNode: Element): Lecture | null {
 
     if (token.includes("Keine Statistik vorhanden")) {
       lecture.noStats = true;
-      continue;
     }
 
-    // not necessarily needed because the token "Keine Statistik vorhanden" is the last token in the data anyways
-    // but it doesnt hurt to check anyways if the flexnow data format changes
-    if (lecture.noStats) continue;
+    if (lecture.noStats) {
+      console.log("skipped stats parsing because of noStats flag for lecture " + lecture.id);
+      continue;
+    }
 
     // check exact prefix matches from the map
     let statFound = false;
