@@ -15,4 +15,4 @@ dist-ssr
 .direnv
 src/assets/FlexNow Studentenschnittstelle.html
 src/assets/parsed.json
-example
+.example

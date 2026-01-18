@@ -11,6 +11,7 @@ export interface ExamStats {
   average_points: number | null;
 }
 
+// TODO: maybe add attemps object?
 export interface Lecture {
   id: string;
   name: string | null;
@@ -197,15 +198,15 @@ function parseLecture(lectureNode: Element): Lecture | null {
       const search = "ECTS:";
       const val = token.substring(token.lastIndexOf(search) + search.length);
       lecture.ects = parseGermanFloat(val); // no need to trim, handled in parseGerFloat
-      continue;
+      // continue; // do not continue as points and ects are in the same token
     }
 
-    // handles "(5.0 Punkte)" or "5,0 Punkte"
     if (token.includes("Punkte")) {
-      // remove 'Punkte', '(', ')'
-      const val = token.replace("Punkte", "").replace(/[()]/g, "");
-      lecture.points = parseGermanFloat(val);
-      continue;
+      const val = token.match(/([\d,]+)\s+Punkte\)/);
+      if (val) {
+        lecture.points = parseGermanFloat(val[0]);
+      }
+      // continue; // do not continue as points and ects are in the same token
     }
 
     if (token.includes("Keine Statistik vorhanden")) {
