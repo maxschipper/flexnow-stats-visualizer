@@ -23,46 +23,13 @@ const handleFileUpload = async (event: Event) => {
 
 <template>
     <div>
-        <h1>FlexNow Importer</h1>
+        <h3>FlexNow Importer</h3>
         <input type="file" @change="handleFileUpload" accept=".html" />
 
         <div v-if="error" style="color: red">{{ error }}</div>
 
-        <div v-for="lecture in lectures" :key="lecture.id" class="lecture-card">
-            <h3>{{ lecture.name }}</h3>
-
-            <p>Grade: {{ lecture.grade }}</p>
-
-            <p v-if="lecture.stats.participants">Participants: {{ lecture.stats.participants }}</p>
-
-            <p v-if="lecture.stats.graded">Graded: {{ lecture.stats.graded }}</p>
-
-            <p v-if="lecture.stats.not_yet_graded">
-                Not yet graded: {{ lecture.stats.not_yet_graded }}
-            </p>
-
-            <p v-if="lecture.stats.passed">passed: {{ lecture.stats.passed }}</p>
-
-            <p v-if="lecture.stats.other">Other: {{ lecture.stats.other }}</p>
-
-            <p v-if="lecture.stats.graded_but_not_passed">
-                graded but not passed: {{ lecture.stats.graded_but_not_passed }}
-            </p>
-
-            <p v-if="lecture.stats.average_grade">
-                average grade: {{ lecture.stats.average_grade }}
-            </p>
-
-            <p v-if="lecture.stats.median_grade">median grade: {{ lecture.stats.median_grade }}</p>
-
-            <p v-if="lecture.stats.standard_deviation_grade">
-                standard deviation grade:
-                {{ lecture.stats.standard_deviation_grade }}
-            </p>
-
-            <p v-if="lecture.stats.average_points">
-                Average Points: {{ lecture.stats.average_points }}
-            </p>
+        <div>
+            <pre>{{ JSON.stringify(lectures, null, 2) }} </pre>
         </div>
     </div>
 </template>
