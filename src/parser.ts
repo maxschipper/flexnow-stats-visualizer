@@ -18,6 +18,7 @@ export interface Lecture {
   points: number | null;
   passed: boolean | null;
   ects: number | null;
+  noStats: boolean | null;
   stats: ExamStats;
 }
 
@@ -147,6 +148,7 @@ function parseLecture(lectureNode: Element): Lecture | null {
     points: null,
     passed: null,
     ects: null,
+    noStats: null,
     stats: {
       participants: null,
       not_yet_graded: null,
@@ -200,6 +202,15 @@ function parseLecture(lectureNode: Element): Lecture | null {
     }
 
     // Check exact prefix matches from the map
+    if (token.includes("Keine Statistik vorhanden")) {
+      lecture.noStats = true;
+      continue;
+    }
+
+    // not necessarily needed because the token "Keine Statistik vorhanden" is the last token in the data anyways
+    // but it doesnt hurt to check anyways if the flexnow data format changes
+    if (lecture.noStats) continue;
+
     let statFound = false;
     for (const [prefix, key] of Object.entries(STATS_MAP)) {
       if (token.startsWith(prefix)) {
