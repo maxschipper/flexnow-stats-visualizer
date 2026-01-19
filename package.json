@@ -9,7 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.24"
+    "@unovis/ts": "^1.6.2",
+    "@unovis/vue": "^1.6.2",
+    "vue": "^3.5.24",
+    "vue-chrts": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
