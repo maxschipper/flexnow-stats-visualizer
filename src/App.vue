@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Debug from "./components/Debug.vue";
+import Details from "./components/Details.vue";
 import FileInput from "./components/FileInput.vue";
 import type { Lecture } from "./parser";
 
@@ -13,11 +14,14 @@ const updateLectures = (newLectures: Lecture[]) => {
 </script>
 
 <template>
-    <div class="my-8">
-        <FileInput @lectures-loaded="updateLectures" />
-    </div>
+    <div class="m-8">
+        <div class="my-8">
+            <FileInput @lectures-loaded="updateLectures" />
+        </div>
 
-    <div>
-        <Debug :lectures />
+        <div>
+            <Details :lectures />
+            <Debug :lectures />
+        </div>
     </div>
 </template>
