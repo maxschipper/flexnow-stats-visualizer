@@ -9,7 +9,7 @@ export default {};
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { extractLecturesFromHtml, type Lecture } from "../parser";
+import { extractLecturesFromHtml, type Lecture } from "@/parser";
 
 const emit = defineEmits<{
     (e: "lectures-loaded", data: Lecture[]): void;

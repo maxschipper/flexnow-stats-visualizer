@@ -7,7 +7,7 @@ export default {};
 </script>
 
 <script setup lang="ts">
-import type { Lecture } from "../parser";
+import type { Lecture } from "@/parser";
 
 defineProps<{ lectures: Lecture[] }>();
 </script>

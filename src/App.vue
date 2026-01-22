@@ -2,9 +2,9 @@
 import { ref } from "vue";
 import Debug from "./components/Debug.vue";
 import Details from "./components/Details.vue";
+import ExampleData from "./components/ExampleData.vue";
 import FileInput from "./components/FileInput.vue";
 import type { Lecture } from "./parser";
-import ExampleData from "./components/ExampleData.vue";
 
 const lectures = ref<Lecture[]>([]);
 
