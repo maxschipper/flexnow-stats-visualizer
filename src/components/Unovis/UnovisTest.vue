@@ -12,7 +12,7 @@ const data = ref<DataRecord[]>([
 
 <template>
     <VisXYContainer>
-        <VisLine :data="data" :x="(d) => d.x" :y="(d) => d.y" />
+        <VisLine :data="data" :x="(d: any) => d.x" :y="(d: any) => d.y" />
         <VisAxis type="x" />
         <VisAxis type="y" />
     </VisXYContainer>
