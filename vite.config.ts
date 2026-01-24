@@ -17,5 +17,6 @@ export default defineConfig({
     host: true,
     port: 5432,
     strictPort: true,
+    allowedHosts: ["localhost", "127.0.0.1", "yoga", "yoga.nb.lab", "dev.nuc.lab"],
   },
 });
