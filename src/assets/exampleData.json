@@ -6,19 +6,7 @@
     "points": null,
     "passed": true,
     "ects": 6,
-    "noStats": true,
-    "stats": {
-      "participants": null,
-      "not_yet_graded": null,
-      "graded": null,
-      "passed": null,
-      "other": null,
-      "graded_but_not_passed": null,
-      "average_grade": null,
-      "median_grade": null,
-      "standard_deviation_grade": null,
-      "average_points": null
-    }
+    "stats": null
   },
   {
     "id": "WiMa-B-002",
@@ -27,7 +15,6 @@
     "points": null,
     "passed": true,
     "ects": 6,
-    "noStats": null,
     "stats": {
       "participants": 278,
       "not_yet_graded": 0,
@@ -48,7 +35,6 @@
     "points": 48,
     "passed": true,
     "ects": 9,
-    "noStats": null,
     "stats": {
       "participants": 70,
       "not_yet_graded": 0,
@@ -69,7 +55,6 @@
     "points": 74,
     "passed": true,
     "ects": 6,
-    "noStats": null,
     "stats": {
       "participants": 158,
       "not_yet_graded": 0,
@@ -90,7 +75,6 @@
     "points": null,
     "passed": true,
     "ects": 3,
-    "noStats": null,
     "stats": {
       "participants": 21,
       "not_yet_graded": 0,
@@ -111,18 +95,6 @@
     "points": null,
     "passed": true,
     "ects": 1,
-    "noStats": null,
-    "stats": {
-      "participants": null,
-      "not_yet_graded": null,
-      "graded": null,
-      "passed": null,
-      "other": null,
-      "graded_but_not_passed": null,
-      "average_grade": null,
-      "median_grade": null,
-      "standard_deviation_grade": null,
-      "average_points": null
-    }
+    "stats": null
   }
 ]
