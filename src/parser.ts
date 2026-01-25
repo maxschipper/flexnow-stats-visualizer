@@ -19,8 +19,7 @@ export interface Lecture {
   points: number | null;
   passed: boolean | null;
   ects: number | null;
-  noStats: boolean | null;
-  stats: ExamStats;
+  stats: ExamStats | null;
 }
 
 // maps prefix strings found in HTML to the corresponding ExamStats key.
@@ -33,7 +32,7 @@ const STATS_MAP: Record<string, keyof ExamStats> = {
   "davon sonstige:": "other",
   "Median:": "median_grade",
   "Standardabweichung:": "standard_deviation_grade",
-  // some prefixes are long/complex, we handle those via partial matches or normalization below
+  // some prefixes are long/complex, we handle those via partial matches below
 };
 
 // special handling for the long/complex prefixes
@@ -148,19 +147,7 @@ function parseLecture(lectureNode: Element): Lecture | null {
     points: null,
     passed: null,
     ects: null,
-    noStats: null,
-    stats: {
-      participants: null,
-      not_yet_graded: null,
-      graded: null,
-      passed: null,
-      other: null,
-      graded_but_not_passed: null,
-      average_grade: null,
-      median_grade: null,
-      standard_deviation_grade: null,
-      average_points: null,
-    },
+    stats: null,
   };
 
   // parse properties (tokens)
@@ -210,21 +197,37 @@ function parseLecture(lectureNode: Element): Lecture | null {
     }
 
     if (token.includes("Keine Statistik vorhanden")) {
-      lecture.noStats = true;
+      lecture.stats = null;
     }
 
-    if (lecture.noStats) {
-      console.log("skipped stats parsing because of noStats flag for lecture " + lecture.id);
-      continue;
-    }
+    // if (lecture.stats === null) {
+    //   console.log("skipped stats parsing because of noStats flag for lecture " + lecture.id);
+    //   continue;
+    // }
 
     // check exact prefix matches from the map
     let statFound = false;
     for (const [prefix, key] of Object.entries(STATS_MAP)) {
       if (token.startsWith(prefix)) {
+        // if lecture.stats is still null initialize it now
+        if (!lecture.stats) {
+          lecture.stats = {
+            participants: null,
+            not_yet_graded: null,
+            graded: null,
+            passed: null,
+            other: null,
+            graded_but_not_passed: null,
+            average_grade: null,
+            median_grade: null,
+            standard_deviation_grade: null,
+            average_points: null,
+          };
+        }
         const valStr = token.substring(prefix.length);
+
         // float is okay here as it will also work with integers; also i expect only numbers here
-        lecture.stats[key] = parseGermanFloat(valStr);
+        lecture.stats[key as keyof ExamStats] = parseGermanFloat(valStr);
         statFound = true;
         break;
       }
@@ -234,6 +237,21 @@ function parseLecture(lectureNode: Element): Lecture | null {
     // check complex prefixes
     for (const { prefix, key } of STATS_PREFIXES_COMPLEX) {
       if (token.startsWith(prefix)) {
+        // if lecture.stats is still null initialize it now
+        if (!lecture.stats) {
+          lecture.stats = {
+            participants: null,
+            not_yet_graded: null,
+            graded: null,
+            passed: null,
+            other: null,
+            graded_but_not_passed: null,
+            average_grade: null,
+            median_grade: null,
+            standard_deviation_grade: null,
+            average_points: null,
+          };
+        }
         // the value is usually after the colon at the end of the long string
         const parts = token.split(":");
         if (parts.length > 1) {
