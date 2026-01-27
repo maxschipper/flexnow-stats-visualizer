@@ -6,13 +6,12 @@
  */
 export default {};
 </script>
-
 <script setup lang="ts">
 // TODO: are people in other strictly no shows or maybe also people handing in empty?
 
-import type { Lecture } from "@/parser";
+import type { ExamStats, Lecture } from "@/parser";
 import { FitMode } from "@unovis/ts";
-import { VisSingleContainer, VisSankey } from "@unovis/vue";
+import { VisSankey, VisSingleContainer } from "@unovis/vue";
 import { computed, ref } from "vue";
 import LectureSelector from "../LectureSelector.vue";
 
@@ -30,29 +29,27 @@ interface link {
 }
 
 const selectedLectureIndex = ref(0);
+const selectedLecture = computed(() => {
+    return props.lectures[selectedLectureIndex.value] ?? null;
+});
 
 const chartData = computed(() => {
-    const selectedLecture = props.lectures[selectedLectureIndex.value];
+    if (!selectedLecture.value) return null;
 
-    if (!selectedLecture?.stats) return null;
+    if (selectedLecture.value.stats === null) return null;
+    const stats: ExamStats = selectedLecture.value.stats;
 
-    const stats = selectedLecture.stats;
-
-    if (stats.participants == null) return null;
-
-    const participants = stats.participants;
-    const noShows = stats.other ?? 0;
-    const showedUp = participants - noShows;
-    const passed = stats.passed ?? 0;
-    const failed = stats.graded_but_not_passed ?? 0;
+    if (Object.values(stats).includes(null)) {
+        return null;
+    }
 
     return {
         nodes: [
-            { id: "root", label: "Signed Up", value: participants },
-            { id: "no_show", label: "Did Not Show", value: noShows },
-            { id: "showed_up", label: "Showed Up", value: showedUp },
-            { id: "passed", label: "Passed", value: passed },
-            { id: "failed", label: "Failed", value: failed },
+            { id: "root", label: "Signed Up", value: stats.participants },
+            { id: "no_show", label: "Did Not Show", value: stats.other },
+            { id: "showed_up", label: "Showed Up", value: stats.participants! - stats.other! },
+            { id: "passed", label: "Passed", value: stats.passed },
+            { id: "failed", label: "Failed", value: stats.graded_but_not_passed },
         ],
         links: [
             { source: "root", target: "no_show" },
@@ -123,7 +120,8 @@ const nodeColor = (n: node) => {
             <div>
                 <h3 class="font-bold">No Data Available</h3>
                 <div class="text-xs">
-                    Lecture {{ lectures[selectedLectureIndex]?.id }} has incomplete statistics.
+                    Lecture {{ selectedLecture?.id || "Unknown" }} is missing a statistic needed for this
+                    graph.
                 </div>
             </div>
         </div>
