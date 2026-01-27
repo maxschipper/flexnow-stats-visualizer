@@ -1,8 +1,13 @@
 <script lang="ts">
 /**
- * sankey diagram, displaying the flow of studens going through this exam splitting into noshows, failed and passed
+ * Sankey Diagram Visualization
+ * Displays the flow of student participation for a specific exam:
+ * Signed Up -> (Showed Up vs No Show) and then: Showed Up -> (Passed vs Failed)
  *
- * @prop {Lecture[]} lectures - the lectures to display the graph for
+ * Includes an internal `LectureSelector` to switch between exams.
+ * Handles error states if the selected lecture has incomplete data.
+ *
+ * @prop {Lecture[]} lectures - The list of lectures available to visualize.
  */
 export default {};
 </script>
@@ -28,18 +33,20 @@ interface link {
     target: node;
 }
 
-const selectedLectureIndex = ref(0);
-const selectedLecture = computed(() => {
-    return props.lectures[selectedLectureIndex.value] ?? null;
-});
+const selectedLecture = ref<Lecture | null>(null);
 
 const chartData = computed(() => {
     if (!selectedLecture.value) return null;
-
     if (selectedLecture.value.stats === null) return null;
     const stats: ExamStats = selectedLecture.value.stats;
 
-    if (Object.values(stats).includes(null)) {
+    // all the stats needed to generate the sankey diagram
+    if (
+        stats.participants === null ||
+        stats.other === null ||
+        stats.passed === null ||
+        stats.graded_but_not_passed === null
+    ) {
         return null;
     }
 
@@ -87,7 +94,7 @@ const nodeColor = (n: node) => {
 
 <template>
     <div class="flex flex-col gap-4">
-        <LectureSelector :lectures="props.lectures" v-model:index="selectedLectureIndex" />
+        <LectureSelector :lectures="props.lectures" v-model:selectedLecture="selectedLecture" />
         <div v-if="chartData" class="h-[400px]">
             <VisSingleContainer :data="chartData" :height="400">
                 <VisSankey

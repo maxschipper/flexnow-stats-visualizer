@@ -1,15 +1,16 @@
 <script lang="ts">
 /**
- * For charts that only work with one lecture instead of the full list of lectures
+ * A dropdown selector for choosing a specific Lecture.
  *
- * use v-model two way binding on index so the index can be updated by this
- * component to automatically select the first valid exam with stats.
+ * This component handles "smart selection":
+ * 1. It filters out lectures that do not have statistics.
+ * 2. It automatically selects the first valid lecture if the provided list changes
+ * or if the current selection becomes invalid.
  *
- * also make sure that the ref that is used for the `index` prop has the default
- * value `0` to prevent state de-syncs
+ * Use `v-model:selectedLecture` to bind to the selected Lecture object directly.
  *
- * @prop {Lecture[]} lectures - the lectures to select from
- * @prop {number} [index] - the currently selected index (use with v-model two way binding)
+ * @prop {Lecture[]} lectures - The list of lectures to choose from.
+ * @model {Lecture | null} selectedLecture - The currently selected Lecture object (two-way binding).
  */
 export default {};
 </script>
@@ -21,7 +22,8 @@ const props = defineProps<{
     lectures: Lecture[];
 }>();
 
-const selectedIndex = defineModel("index", { default: 0 });
+// const selectedIndex = defineModel("index", { default: 0 });
+const selected = defineModel<Lecture | null>("selectedLecture", { default: null });
 
 // const emit = defineEmits<{
 //     (e: "lecture-selected", index: number): void;
@@ -37,18 +39,7 @@ watch(
     () => props.lectures,
     (newLectures) => {
         if (!newLectures?.length) return;
-
-        // check if the current selection is still valid in the new list
-        // if the current index points to a lecture with stats use that
-        // ! i think i want to always recompute the first valid index on change of the lecture list
-        // const currentLecture = newLectures[selectedIndex.value];
-        // if (currentLecture?.stats) return;
-
-        const firstValidIndex = newLectures.findIndex((l) => l.stats !== null);
-        if (firstValidIndex !== -1) {
-            // this automatically emits to the v-model bind in the parent component
-            selectedIndex.value = firstValidIndex;
-        }
+        selected.value = newLectures.find((l) => l.stats !== null) || null;
     },
     { immediate: true }, // run immediately on mount to handle the initial list
 );
@@ -58,12 +49,10 @@ watch(
     <fieldset class="fieldset">
         <legend class="fieldset-legend">Pick a Lecture</legend>
         <!-- <select class="select" @change="updateSelected"> -->
-        <select class="select" v-model="selectedIndex">
+        <select class="select" v-model="selected">
             <!-- <option disabled selected>Pick a browser</option> -->
-            <template v-for="(lecture, index) in lectures">
-                <template v-if="lecture.stats !== null">
-                    <option :value="index">{{ lecture.id }}</option>
-                </template>
+            <template v-for="lecture in lectures" :key="lecture.id">
+                <option v-if="lecture.stats !== null" :value="lecture">{{ lecture.id }}</option>
             </template>
         </select>
         <!-- <span class="label">Optional</span> -->
