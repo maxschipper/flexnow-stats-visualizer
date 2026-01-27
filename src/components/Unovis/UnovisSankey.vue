@@ -1,8 +1,19 @@
+<script lang="ts">
+/**
+ * sankey diagram, displaying the flow of studens going through this exam splitting into noshows, failed and passed
+ *
+ * @prop {Lecture[]} lectures - the lectures to display the graph for
+ */
+export default {};
+</script>
+
 <script setup lang="ts">
+// TODO: are people in other strictly no shows or maybe also people handing in empty?
+
 import type { Lecture } from "@/parser";
 import { FitMode } from "@unovis/ts";
 import { VisSingleContainer, VisSankey } from "@unovis/vue";
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import LectureSelector from "../LectureSelector.vue";
 
 const props = defineProps<{ lectures: Lecture[] }>();
@@ -19,37 +30,29 @@ interface link {
 }
 
 const selectedLectureIndex = ref(0);
-watch(
-    () => props.lectures,
-    (newLectures) => {
-        const current = newLectures[selectedLectureIndex.value];
-        // if current selection is valid do nothing
-        if (current?.stats) return;
-
-        // otherwise find first lecture with stats
-        const firstValidIndex = newLectures.findIndex((l) => l.stats);
-        if (firstValidIndex !== -1) {
-            selectedLectureIndex.value = firstValidIndex;
-        }
-    },
-);
-
-const handleLectureSelect = (newIndex: number) => {
-    selectedLectureIndex.value = newIndex;
-    console.log("updated selectedLectureIndex", selectedLectureIndex.value);
-};
 
 const chartData = computed(() => {
     const selectedLecture = props.lectures[selectedLectureIndex.value];
-    const lec = selectedLecture?.stats;
-    if (lec === null || lec === undefined) return null;
+
+    if (!selectedLecture?.stats) return null;
+
+    const stats = selectedLecture.stats;
+
+    if (stats.participants == null) return null;
+
+    const participants = stats.participants;
+    const noShows = stats.other ?? 0;
+    const showedUp = participants - noShows;
+    const passed = stats.passed ?? 0;
+    const failed = stats.graded_but_not_passed ?? 0;
+
     return {
         nodes: [
-            { id: "root", label: "Signed Up", value: lec.participants },
-            { id: "no_show", label: "Did Not Show", value: lec.other },
-            { id: "showed_up", label: "Showed Up", value: lec.participants! - lec.other! },
-            { id: "passed", label: "Passed", value: lec.passed },
-            { id: "failed", label: "Failed", value: lec.graded_but_not_passed },
+            { id: "root", label: "Signed Up", value: participants },
+            { id: "no_show", label: "Did Not Show", value: noShows },
+            { id: "showed_up", label: "Showed Up", value: showedUp },
+            { id: "passed", label: "Passed", value: passed },
+            { id: "failed", label: "Failed", value: failed },
         ],
         links: [
             { source: "root", target: "no_show" },
@@ -86,9 +89,9 @@ const nodeColor = (n: node) => {
 </script>
 
 <template>
-    <div>
-        <LectureSelector :lectures="props.lectures" @lecture-selected="handleLectureSelect" />
-        <div v-if="chartData">
+    <div class="flex flex-col gap-4">
+        <LectureSelector :lectures="props.lectures" v-model:index="selectedLectureIndex" />
+        <div v-if="chartData" class="h-[400px]">
             <VisSingleContainer :data="chartData" :height="400">
                 <VisSankey
                     :labelFit="FitMode.Wrap"
