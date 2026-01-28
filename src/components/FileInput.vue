@@ -6,7 +6,6 @@
  */
 export default {};
 </script>
-
 <script setup lang="ts">
 import { ref } from "vue";
 import { extractLecturesFromHtml, type Lecture } from "@/parser";
@@ -38,13 +37,11 @@ const handleFileUpload = async (event: Event) => {
 
 <template>
     <div>
-        <!-- <h3>FlexNow Importer</h3>
-        <input type="file" @change="handleFileUpload" accept=".html" class="file-input" />
-        <div v-if="error" style="color: red">{{ error }}</div> -->
+        <div v-if="error" class="text-error">Error: {{ error }}</div>
         <fieldset class="fieldset">
             <legend class="fieldset-legend">Upload your FlexNow HTML file</legend>
             <input type="file" @change="handleFileUpload" accept=".html" class="file-input" />
-            <label class="label">it should be named FlexNow Studentenschnittstelle.html</label>
+            <label class="label">No file? Try with Demo Data</label>
         </fieldset>
     </div>
 </template>
