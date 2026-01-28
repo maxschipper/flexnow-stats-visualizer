@@ -1,31 +1,25 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import Debug from "./components/Debug.vue";
 import Details from "./components/Details.vue";
-import ExampleData from "./components/ExampleData.vue";
-import FileInput from "./components/FileInput.vue";
+import Hero from "./components/Hero.vue";
 import RemoveData from "./components/RemoveData.vue";
-import type { Lecture } from "./parser";
+import UnovisSankey from "./components/Unovis/UnovisSankey.vue";
+import { useLectures } from "./composables/useLectures";
 
-const lectures = ref<Lecture[]>([]);
-
-const updateLectures = (newLectures: Lecture[]) => {
-    console.log("Updating lecutres", newLectures);
-    lectures.value = newLectures;
-};
+const { lectures } = useLectures();
 </script>
 
 <template>
-    <div class="m-8">
-        <div class="my-8">
-            <FileInput @lectures-loaded="updateLectures" />
-            <ExampleData @lectures-loaded="updateLectures" />
-            <RemoveData @lectures-loaded="updateLectures" />
+    <Hero v-if="lectures.length === 0" />
+    <div v-else class="m-8">
+        <div>
+            <RemoveData />
+            <Details />
+            <Debug />
         </div>
 
         <div>
-            <Details :lectures />
-            <Debug :lectures />
+            <UnovisSankey />
         </div>
     </div>
 </template>

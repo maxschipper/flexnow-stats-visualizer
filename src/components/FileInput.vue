@@ -7,12 +7,12 @@
 export default {};
 </script>
 <script setup lang="ts">
+import { useLectures } from "@/composables/useLectures";
+import type { Lecture } from "@/types";
+import { extractLecturesFromHtml } from "@/utils/parser";
 import { ref } from "vue";
-import { extractLecturesFromHtml, type Lecture } from "@/parser";
 
-const emit = defineEmits<{
-    (e: "lectures-loaded", data: Lecture[]): void;
-}>();
+const { setLectures } = useLectures();
 
 const error = ref<string>("");
 
@@ -23,10 +23,10 @@ const handleFileUpload = async (event: Event) => {
         const text = await file.text();
 
         try {
-            const parsedLectures = extractLecturesFromHtml(text);
+            const parsedLectures: Lecture[] = extractLecturesFromHtml(text);
             error.value = "";
             console.log("emitting lectures-loaded event");
-            emit("lectures-loaded", parsedLectures);
+            setLectures(parsedLectures);
         } catch (e: any) {
             console.error(e);
             error.value = e.message;

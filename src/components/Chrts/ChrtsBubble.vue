@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Lecture } from "@/parser";
+import type { Lecture } from "@/types";
 import { computed } from "vue";
 import { BubbleChart, LegendPosition } from "vue-chrts";
 

@@ -15,31 +15,28 @@
 export default {};
 </script>
 <script setup lang="ts">
-import type { Lecture } from "@/parser";
+import type { Lecture } from "@/types";
 import { watch } from "vue";
+import { useLectures } from "@/composables/useLectures";
 
-const props = defineProps<{
-    lectures: Lecture[];
-}>();
+const { lectures } = useLectures();
 
-// const selectedIndex = defineModel("index", { default: 0 });
 const selected = defineModel<Lecture | null>("selectedLecture", { default: null });
 
-// const emit = defineEmits<{
-//     (e: "lecture-selected", index: number): void;
-// }>();
-
-// const updateSelected = (event: Event) => {
-//     const target = event.target as HTMLInputElement;
-//     const newIndex: number = +target.value;
-//     selectedIndex.value = newIndex;
-// };
-
 watch(
-    () => props.lectures,
+    lectures,
     (newLectures) => {
-        if (!newLectures?.length) return;
-        selected.value = newLectures.find((l) => l.stats !== null) || null;
+        if (newLectures.length === 0) {
+            selected.value = null;
+            return;
+        }
+
+        const isCurrentSelectionValid =
+            selected.value && newLectures.some((l) => l.id === selected.value?.id);
+
+        if (!isCurrentSelectionValid) {
+            selected.value = newLectures.find((l) => l.stats !== null) || null;
+        }
     },
     { immediate: true }, // run immediately on mount to handle the initial list
 );
@@ -48,13 +45,12 @@ watch(
 <template>
     <fieldset class="fieldset">
         <legend class="fieldset-legend">Pick a Lecture</legend>
-        <!-- <select class="select" @change="updateSelected"> -->
         <select class="select" v-model="selected">
-            <!-- <option disabled selected>Pick a browser</option> -->
+            <!-- <option disabled selected>Pick lecture</option> -->
             <template v-for="lecture in lectures" :key="lecture.id">
                 <option v-if="lecture.stats !== null" :value="lecture">{{ lecture.id }}</option>
             </template>
         </select>
-        <!-- <span class="label">Optional</span> -->
+        <span class="label">This Chart only works with one lecture at a time.</span>
     </fieldset>
 </template>

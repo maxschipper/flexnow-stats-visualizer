@@ -14,13 +14,11 @@ export default {};
 <script setup lang="ts">
 // TODO: are people in other strictly no shows or maybe also people handing in empty?
 
-import type { ExamStats, Lecture } from "@/parser";
+import type { ExamStats, Lecture } from "@/types";
 import { FitMode } from "@unovis/ts";
 import { VisSankey, VisSingleContainer } from "@unovis/vue";
 import { computed, ref } from "vue";
 import LectureSelector from "../LectureSelector.vue";
-
-const props = defineProps<{ lectures: Lecture[] }>();
 
 interface node {
     id: string;
@@ -33,6 +31,7 @@ interface link {
     target: node;
 }
 
+// used for the v-model on LectureSelector
 const selectedLecture = ref<Lecture | null>(null);
 
 const chartData = computed(() => {
@@ -94,7 +93,7 @@ const nodeColor = (n: node) => {
 
 <template>
     <div class="flex flex-col gap-4">
-        <LectureSelector :lectures="props.lectures" v-model:selectedLecture="selectedLecture" />
+        <LectureSelector v-model:selectedLecture="selectedLecture" />
         <div v-if="chartData" class="h-[400px]">
             <VisSingleContainer :data="chartData" :height="400">
                 <VisSankey

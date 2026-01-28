@@ -7,11 +7,11 @@ export default {};
 </script>
 
 <script setup lang="ts">
-import type { Lecture } from "@/parser";
+import { useLectures } from "@/composables/useLectures";
 
-defineProps<{ lectures: Lecture[] }>();
+const { lectures } = useLectures();
 
-const isObject = (val: any) => val && typeof val === "object";
+// const isObject = (val: any) => val && typeof val === "object";
 </script>
 
 <template>
@@ -32,7 +32,8 @@ const isObject = (val: any) => val && typeof val === "object";
                             <h3 class="mb-2">Lecture Details</h3>
                             <ul>
                                 <li v-for="(value, key) in lecture" :key="key">
-                                    <template v-if="isObject(value)">
+                                    <!-- <template v-if="isObject(value)"> -->
+                                    <template v-if="typeof value === 'object'">
                                         <strong>{{ key }}:</strong>
                                         <ul>
                                             <li v-for="(subValue, subKey) in value" :key="subKey">
