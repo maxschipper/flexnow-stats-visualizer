@@ -12,7 +12,7 @@ import type { Lecture } from "@/types";
 import { extractLecturesFromHtml } from "@/utils/parser";
 import { ref } from "vue";
 
-const { setLectures } = useLectures();
+const { setLectures, loadDemoData } = useLectures();
 
 const error = ref<string>("");
 
@@ -41,7 +41,9 @@ const handleFileUpload = async (event: Event) => {
         <fieldset class="fieldset">
             <legend class="fieldset-legend">Upload your FlexNow HTML file</legend>
             <input type="file" @change="handleFileUpload" accept=".html" class="file-input" />
-            <label class="label">No file? Try with Demo Data</label>
+            <label class="label"
+                >No file? <a @click="loadDemoData" class="link link-info">Try with Demo Data</a></label
+            >
         </fieldset>
     </div>
 </template>
