@@ -92,8 +92,7 @@ const nodeColor = (n: node) => {
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">
-        <LectureSelector v-model:selectedLecture="selectedLecture" />
+    <div>
         <!-- <div v-if="chartData" class="h-[300px]"> -->
         <div v-if="chartData">
             <VisSingleContainer :data="chartData" :height="300">
@@ -132,5 +131,6 @@ const nodeColor = (n: node) => {
                 </div>
             </div>
         </div>
+        <LectureSelector v-model:selectedLecture="selectedLecture" />
     </div>
 </template>
