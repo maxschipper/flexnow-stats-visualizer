@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { VisScatter, VisXYContainer, VisAxis } from "@unovis/vue";
-import { computed } from "vue";
 import { useLectures } from "@/composables/useLectures";
+import { Scatter } from "@unovis/ts";
+import { VisAxis, VisTooltip, VisScatter, VisXYContainer, VisCrosshair } from "@unovis/vue";
+import { computed } from "vue";
 
 const { lectures } = useLectures();
 
@@ -27,13 +28,37 @@ const x = (d: any) => d.difficulty;
 const y = (d: any) => d.performance;
 const size = (d: any) => d.participants;
 const label = (d: any) => d.id;
+const xTickFormat = (val: number) => `${val * 100}%`;
+
+// const tooltipTriggers = {
+//     [Scatter.selectors.point]: (d: any) => `
+//     <div class="font-bold">${d.title}</div>
+//     <div>Grade: ${d.performance}</div>
+//     <div>Fail Rate: ${(d.difficulty * 100).toFixed(1)}%</div>
+//     <div class="text-xs text-gray-400">${d.participants} Students</div>
+//   `,
+// };
+const template = (d: any) => `
+  <div class="font-bold">${d.title}</div>
+  <div>Grade: ${d.performance}</div>
+  <div>Fail Rate: ${(d.difficulty * 100).toFixed(1)}%</div>
+  <div class="text-xs text-gray-400">${d.participants} Students</div>
+  `;
 </script>
 
 <template>
     <VisXYContainer :data="mydata">
-        <VisAxis type="y" label="My grade" :tickValues="[1, 2, 3, 4, 5]" />
-        <VisAxis type="x" :gridLine="true" label="Difficulty (failure rate)" />
-
+        <!-- chart -->
         <VisScatter :x="x" :y="y" :size :sizeRange="[10, 50]" :label />
+        <!-- axis (order here affects x and y???) -->
+        <VisAxis type="y" label="My grade" :tickValues="[1, 2, 3, 4, 5]" />
+        <VisAxis type="x" label="Difficulty (failure rate)" :gridLine="true" :tickFormat="xTickFormat" />
+
+        <!-- tooltip -->
+        <VisCrosshair :template />
+        <VisTooltip />
+
+        <!-- <VisCrosshair /> -->
+        <!-- <VisTooltip :triggers="tooltipTriggers" :hideDelay="0" />  -->
     </VisXYContainer>
 </template>
