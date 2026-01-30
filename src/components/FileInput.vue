@@ -40,7 +40,12 @@ const handleFileUpload = async (event: Event) => {
         <div v-if="error" class="text-error">Error: {{ error }}</div>
         <fieldset class="fieldset">
             <legend class="fieldset-legend">Upload your FlexNow HTML file</legend>
-            <input type="file" @change="handleFileUpload" accept=".html" class="file-input" />
+            <input
+                type="file"
+                class="file-input file-input-neutral file-input-md"
+                @change="handleFileUpload"
+                accept=".html"
+            />
             <label class="label"
                 >No file? <a @click="loadDemoData" class="link link-info">Try with Demo Data</a></label
             >
