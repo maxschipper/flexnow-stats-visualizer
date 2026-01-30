@@ -4,6 +4,7 @@ import Details from "./components/Details.vue";
 import Hero from "./components/Hero.vue";
 import RemoveData from "./components/RemoveData.vue";
 import UnovisSankey from "./components/Unovis/UnovisSankey.vue";
+import UnovisScatter from "./components/Unovis/UnovisScatter.vue";
 import { useLectures } from "./composables/useLectures";
 
 const { lectures } = useLectures();
@@ -19,6 +20,7 @@ const { lectures } = useLectures();
         </div>
 
         <div>
+            <UnovisScatter />
             <UnovisSankey />
         </div>
     </div>

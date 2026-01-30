@@ -26,12 +26,14 @@ const mydata = computed(() =>
 const x = (d: any) => d.difficulty;
 const y = (d: any) => d.performance;
 const size = (d: any) => d.participants;
+const label = (d: any) => d.id;
 </script>
 
 <template>
     <VisXYContainer :data="mydata">
-        <VisAxis type="y" :gridLine="true" label="My grade" :numTicks="5" :tickValues="[0, 1, 3, 4, 5]" />
-        <VisAxis type="x" :gridLine="false" :tickValues="[1, 2, 3]" label="Difficulty (failure rate)" />
-        <VisScatter :x="x" :y="y" :size :sizeRange="[10, 50]" />
+        <VisAxis type="y" label="My grade" :tickValues="[1, 2, 3, 4, 5]" />
+        <VisAxis type="x" :gridLine="true" label="Difficulty (failure rate)" />
+
+        <VisScatter :x="x" :y="y" :size :sizeRange="[10, 50]" :label />
     </VisXYContainer>
 </template>
