@@ -66,7 +66,7 @@ function getTextTokens(rootElement: Element): string[] {
 
 /**
  * Extracs all the lecture stats from the FlexNow HTML page
- * @param htmlContent the html page exported from FlexNow
+ * @param htmlContent the html page exported from FlexNow as a `string`
  * @returns an array of `Lecture[]` objects with the parsed data
  */
 export function extractLecturesFromHtml(htmlContent: string): Lecture[] {
@@ -74,13 +74,20 @@ export function extractLecturesFromHtml(htmlContent: string): Lecture[] {
   const doc = parser.parseFromString(htmlContent, "text/html");
 
   // the container with id="listePrffachAbgelegt" has the lectures with their results
-  const container = doc.querySelector("#listePrffachAbgelegt ul ul");
+  const container = doc.querySelector("#listePrffachAbgelegt");
   if (!container) {
-    throw new Error("Parser Error: Container '#listePrffachAbgelegt ul ul' not found.");
+    throw new Error("Parser Error: Container '#listePrffachAbgelegt' not found.");
+  }
+
+  // TODO: inside container there are infos like ects and total ects progress
+
+  const lectureContainer = container.querySelector("ul ul");
+  if (!lectureContainer) {
+    throw new Error("Parser Error: Container containining the lectures not found.");
   }
 
   // every li element with class="collapsable" is a lecture
-  const lectureNodes = Array.from(container.querySelectorAll("li.collapsable"));
+  const lectureNodes = Array.from(lectureContainer.querySelectorAll("li.collapsable"));
   if (lectureNodes.length === 0) {
     throw new Error("Parser Error: No lectures found (no 'li.collapsable').");
   }
@@ -112,6 +119,7 @@ function parseLecture(lectureNode: Element): Lecture | null {
 
   // const fullTitle = nameSpan.textContent.replace(/\s+/g, " ").trim();
   const fullTitle = cleanupString(nameSpan.textContent);
+
   // regex to split "Inf-Einf: Einführung in die Informatik" -> ["Inf-Einf", "Einführung in die Informatik"]
   const titleMatch = fullTitle.match(/^([^:]+):\s+(.+)$/);
 

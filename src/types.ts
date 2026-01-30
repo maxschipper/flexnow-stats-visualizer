@@ -21,3 +21,8 @@ export interface Lecture {
   ects: number | null;
   stats: ExamStats | null;
 }
+
+// export interface FlexNowData {
+//   lectures: Lecture[];
+//   otherData: null;
+// }
