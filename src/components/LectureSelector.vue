@@ -18,6 +18,7 @@ export default {};
 import type { Lecture } from "@/types";
 import { watch } from "vue";
 import { useLectures } from "@/composables/useLectures";
+import { InfoIcon } from "lucide-vue-next";
 
 const { lectures } = useLectures();
 
@@ -44,13 +45,15 @@ watch(
 
 <template>
     <fieldset class="fieldset">
-        <legend class="fieldset-legend">Pick a Lecture</legend>
+        <legend class="fieldset-legend pl-1">Pick a Lecture</legend>
         <select class="select" v-model="selected">
             <!-- <option disabled selected>Pick lecture</option> -->
             <template v-for="lecture in lectures" :key="lecture.id">
                 <option v-if="lecture.stats !== null" :value="lecture">{{ lecture.id }}</option>
             </template>
         </select>
-        <span class="label">This Chart only works with one lecture at a time.</span>
+        <span class="label pl-1"
+            ><InfoIcon :size="14" />This Chart only works with one lecture at a time.</span
+        >
     </fieldset>
 </template>
