@@ -6,22 +6,23 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tunnel": ", cloudflared tunnel --url http://localhost:5432"
   },
   "dependencies": {
     "@unovis/ts": "^1.6.2",
     "@unovis/vue": "^1.6.2",
-    "vue": "^3.5.24",
+    "vue": "^3.5.27"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
-    "@types/node": "^24.10.1",
-    "@vitejs/plugin-vue": "^6.0.1",
+    "@types/node": "^24.10.9",
+    "@vitejs/plugin-vue": "^6.0.3",
     "@vue/tsconfig": "^0.8.1",
     "daisyui": "^5.5.14",
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
-    "vite": "^7.2.4",
-    "vue-tsc": "^3.1.4"
+    "vite": "^7.3.1",
+    "vue-tsc": "^3.2.4"
   }
 }
