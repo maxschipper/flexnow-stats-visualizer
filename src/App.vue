@@ -6,7 +6,6 @@ import RemoveData from "./components/RemoveData.vue";
 import ChartSankey from "./components/Chart/ChartSankey.vue";
 import ChartScatter from "./components/Chart/ChartScatter.vue";
 import { useLectures } from "./composables/useLectures";
-import ChartCard from "./components/Chart/ChartCard.vue";
 
 const { lectures } = useLectures();
 </script>
@@ -16,13 +15,8 @@ const { lectures } = useLectures();
     <!-- <div v-else class="p-4"> -->
     <div v-else class="">
         <div>
-            <ChartCard heading="Performance vs. Difficulty Matrix">
-                <ChartScatter />
-            </ChartCard>
-            <!-- <ChartPerf /> -->
-            <ChartCard heading="Student Flow Chart">
-                <ChartSankey />
-            </ChartCard>
+            <ChartScatter />
+            <ChartSankey />
         </div>
         <div>
             <RemoveData />

@@ -19,6 +19,7 @@ import { FitMode } from "@unovis/ts";
 import { VisSankey, VisSingleContainer } from "@unovis/vue";
 import { computed, ref } from "vue";
 import LectureSelector from "../LectureSelector.vue";
+import ChartCard from "./ChartCard.vue";
 
 interface node {
     id: string;
@@ -92,45 +93,47 @@ const nodeColor = (n: node) => {
 </script>
 
 <template>
-    <div>
-        <!-- <div v-if="chartData" class="h-[300px]"> -->
-        <div v-if="chartData">
-            <VisSingleContainer :data="chartData" :height="300">
-                <VisSankey
-                    :labelFit="FitMode.Wrap"
-                    labelForceWordBreak="false"
-                    :labelMaxWidth="50"
-                    :nodePadding="30"
-                    :nodeColor
-                    nodeAlign="left"
-                    :linkSort
-                    :linkValue
-                    :subLabel
-                />
-            </VisSingleContainer>
-        </div>
-        <div v-else role="alert" class="alert alert-warning shadow-lg">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="stroke-current shrink-0 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-            </svg>
-            <div>
-                <h3 class="font-bold">No Data Available</h3>
-                <div class="text-xs">
-                    Lecture {{ selectedLecture?.id || "Unknown" }} is missing a statistic needed for this
-                    graph.
+    <ChartCard heading="Student Flow Chart">
+        <div>
+            <!-- <div v-if="chartData" class="h-[300px]"> -->
+            <div v-if="chartData">
+                <VisSingleContainer :data="chartData" :height="300">
+                    <VisSankey
+                        :labelFit="FitMode.Wrap"
+                        labelForceWordBreak="false"
+                        :labelMaxWidth="50"
+                        :nodePadding="30"
+                        :nodeColor
+                        nodeAlign="left"
+                        :linkSort
+                        :linkValue
+                        :subLabel
+                    />
+                </VisSingleContainer>
+            </div>
+            <div v-else role="alert" class="alert alert-warning shadow-lg">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="stroke-current shrink-0 h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                </svg>
+                <div>
+                    <h3 class="font-bold">No Data Available</h3>
+                    <div class="text-xs">
+                        Lecture {{ selectedLecture?.id || "Unknown" }} is missing a statistic needed for this
+                        graph.
+                    </div>
                 </div>
             </div>
+            <LectureSelector v-model:selectedLecture="selectedLecture" />
         </div>
-        <LectureSelector v-model:selectedLecture="selectedLecture" />
-    </div>
+    </ChartCard>
 </template>

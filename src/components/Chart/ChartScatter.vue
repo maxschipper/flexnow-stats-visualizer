@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useLectures } from "@/composables/useLectures";
-import { Scatter } from "@unovis/ts";
-import { VisAxis, VisTooltip, VisScatter, VisXYContainer, VisCrosshair } from "@unovis/vue";
+// import { Scatter } from "@unovis/ts";
+import { VisAxis, VisCrosshair, VisScatter, VisTooltip, VisXYContainer } from "@unovis/vue";
 import { computed } from "vue";
-
+import ChartCard from "./ChartCard.vue";
 const { lectures } = useLectures();
 
 const mydata = computed(() =>
@@ -47,18 +47,20 @@ const template = (d: any) => `
 </script>
 
 <template>
-    <VisXYContainer :data="mydata">
-        <!-- chart -->
-        <VisScatter :x="x" :y="y" :size :sizeRange="[10, 50]" :label />
-        <!-- axis (order here affects x and y???) -->
-        <VisAxis type="y" label="My grade" :tickValues="[1, 2, 3, 4, 5]" />
-        <VisAxis type="x" label="Difficulty (failure rate)" :gridLine="true" :tickFormat="xTickFormat" />
+    <ChartCard heading="Performance vs. Difficulty Matrix">
+        <VisXYContainer :data="mydata">
+            <!-- chart -->
+            <VisScatter :x="x" :y="y" :size :sizeRange="[10, 50]" :label />
+            <!-- axis (order here affects x and y???) -->
+            <VisAxis type="y" label="My grade" :tickValues="[1, 2, 3, 4, 5]" />
+            <VisAxis type="x" label="Difficulty (failure rate)" :gridLine="true" :tickFormat="xTickFormat" />
 
-        <!-- tooltip -->
-        <VisCrosshair :template />
-        <VisTooltip />
+            <!-- tooltip -->
+            <VisCrosshair :template />
+            <VisTooltip />
 
-        <!-- <VisCrosshair /> -->
-        <!-- <VisTooltip :triggers="tooltipTriggers" :hideDelay="0" />  -->
-    </VisXYContainer>
+            <!-- <VisCrosshair /> -->
+            <!-- <VisTooltip :triggers="tooltipTriggers" :hideDelay="0" />  -->
+        </VisXYContainer>
+    </ChartCard>
 </template>
