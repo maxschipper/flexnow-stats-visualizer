@@ -2,7 +2,6 @@
   "plugins": [
     "prettier-plugin-packagejson",
     "@trivago/prettier-plugin-sort-imports",
-    "prettier-plugin-organize-attributes",
     "prettier-plugin-tailwindcss"
   ],
   "semi": true,
@@ -13,18 +12,6 @@
   "trailingComma": "all",
   "vueIndentScriptAndStyle": false,
   "endOfLine": "lf",
-  "attributeGroups": [
-    "$PRECEDENCE",
-    "^v-if$",
-    "^v-for$",
-    "^v-model$",
-    "^v-else$",
-    "^:key$",
-    "^id$",
-    "^ref$",
-    "$PROPS",
-    "^class$"
-  ],
   "importOrder": ["<THIRD_PARTY_MODULES>", "^@/|^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
