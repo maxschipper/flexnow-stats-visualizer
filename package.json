@@ -9,7 +9,7 @@
     "format:check": "prettier --check .",
     "format:fix": "prettier --write .",
     "preview": "vite preview",
-    "tunnel": ", cloudflared tunnel --url http://localhost:5432"
+    "tunnel": ", cloudflared tunnel --url http://localhost:8080"
   },
   "dependencies": {
     "@unovis/ts": "^1.6.2",
