@@ -12,10 +12,10 @@ const { lectures } = useLectures();
   <Hero v-if="lectures.length === 0" />
   <!-- <div v-else class="p-4"> -->
   <div v-else>
-    <Navbar />
+    <Navbar class="mb-3" />
     <div class="container max-w-full px-2">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <ChartScatter class="mt-2" />
+        <ChartScatter />
         <ChartSankey />
       </div>
     </div>
