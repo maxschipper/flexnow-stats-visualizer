@@ -1,15 +1,18 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: false;
+  logs: true;
+}
 
 /** {
     outline: 1px solid red !important;
 }*/
 
-*,
+/**,
 *::before,
 *::after {
   box-sizing: border-box;
-}
+}*/
 
 /*input,
 select,
