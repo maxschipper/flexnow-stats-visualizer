@@ -17,6 +17,7 @@ export default {};
 import type { ExamStats, Lecture } from "@/types";
 import { FitMode, SankeyNodeAlign, TrimMode } from "@unovis/ts";
 import { VisSankey, VisSingleContainer } from "@unovis/vue";
+import { TriangleAlertIcon } from "lucide-vue-next";
 import { computed, ref } from "vue";
 import LectureSelector from "../LectureSelector.vue";
 import ChartCard from "./ChartCard.vue";
@@ -116,19 +117,7 @@ const nodeColor = (n: node) => {
                 </VisSingleContainer>
             </div>
             <div v-else role="alert" class="alert alert-warning shadow-lg">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="stroke-current shrink-0 h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                    />
-                </svg>
+                <TriangleAlertIcon />
                 <div>
                     <h3 class="font-bold">No Data Available</h3>
                     <div class="text-xs">
