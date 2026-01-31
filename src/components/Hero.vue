@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { CloudOffIcon, FileLockIcon, GlobeXIcon, LockKeyholeIcon, ShieldCheckIcon } from "lucide-vue-next";
 import FileInput from "./FileInput.vue";
 </script>
 
 <template>
     <!-- <div class="hero bg-base-200 min-h-screen"> -->
-    <div class="hero bg-base-200 min-h-dvh">
+    <div class="hero min-h-dvh">
         <div class="hero-content flex-col lg:flex-row-reverse">
             <div class="text-center lg:text-left">
                 <h1 class="text-5xl font-bold">FlexNow Stats Visualizer</h1>
@@ -13,17 +14,20 @@ import FileInput from "./FileInput.vue";
                     the others.
                 </p>
             </div>
-            <div class="card bg-base-100 max-w-sm shrink-0 shadow-2xl">
+            <div class="card bg-base-200 max-w-sm shrink-0 shadow-2xl">
                 <div class="card-body">
                     <FileInput />
-                    <!-- <fieldset class="fieldset">
-                        <label class="label">Email</label>
-                        <input type="email" class="input" placeholder="Email" />
-                        <label class="label">Password</label>
-                        <input type="password" class="input" placeholder="Password" />
-                        <div><a class="link link-hover">Forgot password?</a></div>
-                        <button class="btn btn-neutral mt-4">Login</button>
-                    </fieldset> -->
+                    <div class="text-xs text-base-content/50">
+                        <div class="badge badge-accent text-accent-content mr-1">
+                            <CloudOffIcon :size="16" />
+                            <!-- <ShieldCheckIcon :size="16" /> -->
+                            <!-- <LockKeyholeIcon :size="16" /> -->
+                            <!-- <FileLockIcon :size="16" /> -->
+                            <!-- <GlobeXIcon :size="16" /> -->
+                        </div>
+                        Processed locally in your browser.
+                        <!-- Processed locally in your browser. No data leaves your device. -->
+                    </div>
                 </div>
             </div>
         </div>
