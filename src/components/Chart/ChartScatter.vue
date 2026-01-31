@@ -48,19 +48,27 @@ const template = (d: any) => `
 
 <template>
     <ChartCard heading="Performance vs. Difficulty Matrix">
-        <VisXYContainer :data="mydata">
-            <!-- chart -->
-            <VisScatter :x="x" :y="y" :size :sizeRange="[10, 50]" :label />
-            <!-- axis (order here affects x and y???) -->
-            <VisAxis type="y" label="My grade" :tickValues="[1, 2, 3, 4, 5]" />
-            <VisAxis type="x" label="Difficulty (failure rate)" :gridLine="true" :tickFormat="xTickFormat" />
+        <div class="pr-6">
+            <VisXYContainer :data="mydata" :height="350" class="">
+                <!-- chart -->
+                <VisScatter :x="x" :y="y" :size :sizeRange="[10, 50]" :label />
+                <!-- axis (order here affects x and y???) -->
+                <VisAxis type="y" label="My grade" :tickValues="[1, 2, 3, 4, 5]" />
+                <VisAxis
+                    type="x"
+                    label="Difficulty (failure rate)"
+                    :gridLine="true"
+                    :tickFormat="xTickFormat"
+                    :tickValues="[0, 0.2, 0.4, 0.6, 0.8, 1]"
+                />
 
-            <!-- tooltip -->
-            <VisCrosshair :template />
-            <VisTooltip />
+                <!-- tooltip -->
+                <VisCrosshair :template />
+                <VisTooltip />
 
-            <!-- <VisCrosshair /> -->
-            <!-- <VisTooltip :triggers="tooltipTriggers" :hideDelay="0" />  -->
-        </VisXYContainer>
+                <!-- <VisCrosshair /> -->
+                <!-- <VisTooltip :triggers="tooltipTriggers" :hideDelay="0" />  -->
+            </VisXYContainer>
+        </div>
     </ChartCard>
 </template>
