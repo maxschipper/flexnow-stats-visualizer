@@ -18,8 +18,8 @@ import FileInput from "./FileInput.vue";
       <div class="card bg-base-200 max-w-sm shrink-0 shadow-2xl">
         <div class="card-body">
           <FileInput />
-          <div class="text-base-content/50 text-xs">
-            <div class="badge badge-accent text-accent-content mr-1">
+          <div class="text-base-content/50 flex items-center gap-2 text-xs">
+            <div class="badge badge-accent text-accent-content">
               <CloudOffIcon :size="16" />
               <!-- <ShieldCheckIcon :size="16" /> -->
               <!-- <LockKeyholeIcon :size="16" /> -->
