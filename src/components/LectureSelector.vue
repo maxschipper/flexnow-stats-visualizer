@@ -45,14 +45,14 @@ watch(
 
 <template>
     <fieldset class="fieldset">
-        <legend class="fieldset-legend pl-1">Pick a Lecture</legend>
-        <select class="select" v-model="selected">
+        <legend class="fieldset-legend pl-1.5">Pick a Lecture</legend>
+        <select class="select bg-base-100" v-model="selected">
             <!-- <option disabled selected>Pick lecture</option> -->
             <template v-for="lecture in lectures" :key="lecture.id">
                 <option v-if="lecture.stats !== null" :value="lecture">{{ lecture.id }}</option>
             </template>
         </select>
-        <span class="label pl-1"
+        <span class="label pl-1.5"
             ><InfoIcon :size="14" />This Chart only works with one lecture at a time.</span
         >
     </fieldset>
