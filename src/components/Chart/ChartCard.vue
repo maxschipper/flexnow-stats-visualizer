@@ -3,8 +3,10 @@ const { heading = "missing heading prop" } = defineProps<{ heading: string }>();
 </script>
 
 <template>
-    <div class="m-4 p-3 bg-base-200 rounded-box shadow">
-        <h3 class="font-bold mb-4 ml-4">{{ heading }}</h3>
-        <slot />
+    <div class="p-4 bg-base-200 rounded-box shadow-lg">
+        <h3 class="font-bold pb-4">{{ heading }}</h3>
+        <div class="">
+            <slot />
+        </div>
     </div>
 </template>
