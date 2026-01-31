@@ -15,7 +15,7 @@ export default {};
 // TODO: are people in other strictly no shows or maybe also people handing in empty?
 
 import type { ExamStats, Lecture } from "@/types";
-import { FitMode } from "@unovis/ts";
+import { FitMode, SankeyNodeAlign, TrimMode } from "@unovis/ts";
 import { VisSankey, VisSingleContainer } from "@unovis/vue";
 import { computed, ref } from "vue";
 import LectureSelector from "../LectureSelector.vue";
@@ -99,15 +99,19 @@ const nodeColor = (n: node) => {
             <div v-if="chartData">
                 <VisSingleContainer :data="chartData" :height="300">
                     <VisSankey
-                        :labelFit="FitMode.Wrap"
-                        labelForceWordBreak="false"
-                        :labelMaxWidth="50"
-                        :nodePadding="30"
+                        :nodeAlign="SankeyNodeAlign.Left"
                         :nodeColor
-                        nodeAlign="left"
+                        :nodePadding="30"
                         :linkSort
                         :linkValue
+                        :labelFit="FitMode.Wrap"
+                        :labelTrimMode="TrimMode.End"
+                        :labelForceWordBreak="false"
+                        :labelBackground="false"
+                        :labelFontSize="10"
+                        :labelMaxWidth="15"
                         :subLabel
+                        :subLabelFontSize="8"
                     />
                 </VisSingleContainer>
             </div>
