@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useDark } from "@vueuse/core";
 import { RotateCcwIcon } from "lucide-vue-next";
+import { MoonIcon, SunIcon } from "lucide-vue-next";
 import { ref } from "vue";
 
 import Debug from "./Debug.vue";
@@ -11,6 +13,8 @@ const modalRef = ref<HTMLDialogElement | null>(null);
 
 const openModal = () => modalRef.value?.showModal();
 // const closeModal = () => modalRef.value?.close();
+
+const isDark = useDark();
 </script>
 <template>
   <div class="navbar bg-base-100 shadow-sm">
@@ -19,6 +23,16 @@ const openModal = () => modalRef.value?.showModal();
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal px-1">
+        <li>
+          <label class="swap swap-rotate">
+            <!-- this hidden checkbox controls the state -->
+            <input v-if="isDark" type="checkbox" class="theme-controller" value="mylight" />
+            <input v-if="!isDark" type="checkbox" class="theme-controller" value="mydark" />
+
+            <SunIcon class="swap-off h-8 w-8" />
+            <MoonIcon class="swap-on h-8 w-8" />
+          </label>
+        </li>
         <li>
           <button class="btn btn-ghost" @click="openModal">Data</button>
 
