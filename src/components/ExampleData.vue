@@ -12,5 +12,5 @@ const { loadDemoData } = useLectures();
 </script>
 
 <template>
-    <button @click="loadDemoData" class="btn">Use example data</button>
+  <button @click="loadDemoData" class="btn">Use example data</button>
 </template>

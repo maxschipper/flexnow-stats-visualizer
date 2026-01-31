@@ -1,11 +1,13 @@
 {
   "name": "typescript-port",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "dev": "vite",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
     "preview": "vite preview",
     "tunnel": ", cloudflared tunnel --url http://localhost:5432"
   },
@@ -17,10 +19,16 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^24.10.9",
     "@vitejs/plugin-vue": "^6.0.3",
     "@vue/tsconfig": "^0.8.1",
     "daisyui": "^5.5.14",
+    "prettier": "^3.8.1",
+    "prettier-plugin-css-order": "^2.2.0",
+    "prettier-plugin-organize-attributes": "^1.0.0",
+    "prettier-plugin-packagejson": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "vite": "^7.3.1",

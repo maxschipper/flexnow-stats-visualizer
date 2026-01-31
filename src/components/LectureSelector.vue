@@ -15,45 +15,50 @@
 export default {};
 </script>
 <script setup lang="ts">
-import type { Lecture } from "@/types";
-import { watch } from "vue";
-import { useLectures } from "@/composables/useLectures";
 import { InfoIcon } from "lucide-vue-next";
+import { watch } from "vue";
+
+import { useLectures } from "@/composables/useLectures";
+import type { Lecture } from "@/types";
 
 const { lectures } = useLectures();
 
-const selected = defineModel<Lecture | null>("selectedLecture", { default: null });
+const selected = defineModel<Lecture | null>("selectedLecture", {
+  default: null,
+});
 
 watch(
-    lectures,
-    (newLectures) => {
-        if (newLectures.length === 0) {
-            selected.value = null;
-            return;
-        }
+  lectures,
+  (newLectures) => {
+    if (newLectures.length === 0) {
+      selected.value = null;
+      return;
+    }
 
-        const isCurrentSelectionValid =
-            selected.value && newLectures.some((l) => l.id === selected.value?.id);
+    const isCurrentSelectionValid =
+      selected.value && newLectures.some((l) => l.id === selected.value?.id);
 
-        if (!isCurrentSelectionValid) {
-            selected.value = newLectures.find((l) => l.stats !== null) || null;
-        }
-    },
-    { immediate: true }, // run immediately on mount to handle the initial list
+    if (!isCurrentSelectionValid) {
+      selected.value = newLectures.find((l) => l.stats !== null) || null;
+    }
+  },
+  { immediate: true }, // run immediately on mount to handle the initial list
 );
 </script>
 
 <template>
-    <fieldset class="fieldset">
-        <legend class="fieldset-legend pl-1.5">Pick a Lecture</legend>
-        <select class="select bg-base-100" v-model="selected">
-            <!-- <option disabled selected>Pick lecture</option> -->
-            <template v-for="lecture in lectures" :key="lecture.id">
-                <option v-if="lecture.stats !== null" :value="lecture">{{ lecture.id }}</option>
-            </template>
-        </select>
-        <span class="label pl-1.5"
-            ><InfoIcon :size="14" />This Chart only works with one lecture at a time.</span
-        >
-    </fieldset>
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend pl-1.5">Pick a Lecture</legend>
+    <select class="select bg-base-100" v-model="selected">
+      <!-- <option disabled selected>Pick lecture</option> -->
+      <template v-for="lecture in lectures" :key="lecture.id">
+        <option v-if="lecture.stats !== null" :value="lecture">
+          {{ lecture.id }}
+        </option>
+      </template>
+    </select>
+    <span class="label pl-1.5">
+      <InfoIcon :size="14" />This Chart only works with one lecture at a time.
+    </span>
+  </fieldset>
 </template>
