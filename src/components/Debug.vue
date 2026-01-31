@@ -13,7 +13,7 @@ const { lectures } = useLectures();
 
 <template>
   <div v-if="lectures.length === 0">Load lectures to show debug output</div>
-  <div v-else class="collapse-arrow collapse">
+  <div v-else class="collapse-arrow bg-base-200 border-base-300 collapse">
     <input type="checkbox" />
     <div class="collapse-title ps-12 pe-4 font-semibold after:start-5 after:end-auto">
       Debug JSON

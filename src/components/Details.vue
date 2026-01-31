@@ -18,20 +18,19 @@ const { lectures } = useLectures();
   <div v-if="lectures.length === 0">Load a html file to show details</div>
 
   <div v-else>
-    <div class="collapse-arrow collapse">
+    <div class="collapse-arrow bg-base-200 collapse">
       <input type="checkbox" />
       <div class="collapse-title ps-12 pe-4 font-semibold after:start-5 after:end-auto">
         Details
       </div>
       <div class="collapse-content">
         <div v-for="lecture in lectures">
-          <div class="collapse-arrow bg-base-100 border-base-300 collapse my-2 border">
+          <div class="collapse-arrow bg-base-200 collapse my-2 border border-none">
             <input type="checkbox" />
             <div class="collapse-title ps-12 pe-4 font-semibold after:start-5 after:end-auto">
               {{ lecture.id }}
             </div>
             <div class="collapse-content text-sm">
-              <h3 class="mb-2">Lecture Details</h3>
               <ul>
                 <li v-for="(value, key) in lecture" :key="key">
                   <!-- <template v-if="isObject(value)"> -->
