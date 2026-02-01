@@ -23,19 +23,22 @@ const chartData = computed(() => {
 const x = (_: any, i: number) => i;
 const y = [(d: any) => d.myGrade, (d: any) => d.median, (d: any) => d.average];
 
-const legendItems = [{ name: "My Grade" }, { name: "Median" }, { name: "Average" }];
+const legendItems: BulletLegendItemInterface[] = [
+  { name: "My Grade" },
+  { name: "Median" },
+  { name: "Average" },
+];
 
 // const color = (_: any, i: number) => ["#3B82F6", "#A855F7", "#9CA3AF"][i];
 
-// Custom Tooltip
-// const tooltipTriggers = {
-//   [GroupedBar.selectors.bar]: (d: any) => `
-//     <div class="font-bold">${d.fullName}</div>
-//     <div class="text-blue-500">Me: ${d.myGrade}</div>
-//     <div class="text-purple-500">Median: ${d.median}</div>
-//     <div class="text-gray-500">Avg: ${d.average.toFixed(2)}</div>
-//   `,
-// };
+const tooltipTriggers = {
+  [GroupedBar.selectors.barGroup]: (d: any) => `
+    <div class="font-bold">${d.fullName}</div>
+    <div>Me: ${d.myGrade}</div>
+    <div>Median: ${d.median}</div>
+    <div>Avg: ${d.average.toFixed(2)}</div>
+  `,
+};
 
 const tickFormatX = (tick: number) => chartData.value[tick]?.name;
 const tickValuesX = computed(() => {
@@ -46,7 +49,6 @@ const tickValuesX = computed(() => {
 <template>
   <ChartCard heading="Me vs. The Median">
     <VisXYContainer :data="chartData" :height="370">
-      <!-- <VisXYContainer :data="chartData"> -->
       <VisGroupedBar :x :y />
 
       <VisAxis
@@ -58,20 +60,14 @@ const tickValuesX = computed(() => {
         :tickLine="false"
         tickTextFitMode="trim"
         tickTextTrimType="end"
-        :tickTextAngle="30"
+        :tickTextAngle="20"
         :tickTextWidth="80"
         :tickTextHideOverlapping="false"
         tickTextFontSize="10px"
       />
       <VisAxis type="y" label="Grade" :gridLine="true" />
-      <!-- <VisTooltip :triggers="tooltipTriggers" /> -->
-      <!-- <VisBulletLegend
-        :items="[
-          { name: 'My Grade', color: '#3B82F6' },
-          { name: 'Class Median', color: '#A855F7' },
-          { name: 'Class Average', color: '#9CA3AF' },
-        ]"
-      /> -->
+
+      <VisTooltip :triggers="tooltipTriggers" />
     </VisXYContainer>
     <VisBulletLegend :items="legendItems" />
   </ChartCard>
