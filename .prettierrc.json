@@ -4,14 +4,7 @@
     "@trivago/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss"
   ],
-  "semi": true,
-  "singleQuote": false,
-  "tabWidth": 2,
-  "useTabs": false,
   "printWidth": 100,
-  "trailingComma": "all",
-  "vueIndentScriptAndStyle": false,
-  "endOfLine": "lf",
   "importOrder": ["<THIRD_PARTY_MODULES>", "^@/|^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
