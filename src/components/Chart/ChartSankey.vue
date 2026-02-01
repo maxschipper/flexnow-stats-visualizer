@@ -80,27 +80,29 @@ const sortOrder: Record<string, number> = {
   passed: 3,
   failed: 4,
 };
+
 const linkSort = (link1: link, link2: link) => {
   const order1 = sortOrder[link1.target.id] ?? 99;
   const order2 = sortOrder[link2.target.id] ?? 99;
   return order1 - order2;
 };
-const linkValue = (l: link) => l.target.value;
-const subLabel = (n: node) => n.value;
+
 const nodeColor = (n: node) => {
   switch (n.id) {
     case "passed":
-      return "green";
+      return "var(--color-success)";
     case "failed":
-      return "red";
+      return "var(--color-error)";
+    // default:
+    //   return "var(--color-neutral";
   }
 };
 </script>
 
 <template>
-  <ChartCard heading="Student Flow Chart">
+  <!-- <ChartCard heading="Student Flow Chart"> -->
+  <ChartCard heading="Survivor Flow Chart">
     <div>
-      <!-- <div v-if="chartData" class="h-[300px]"> -->
       <div v-if="chartData">
         <VisSingleContainer :data="chartData" :height="300">
           <VisSankey
@@ -108,18 +110,21 @@ const nodeColor = (n: node) => {
             :nodeColor
             :nodePadding="30"
             :linkSort
-            :linkValue
+            :linkValue="(l: link) => l.target.value"
+            labelColor="var(--color-base-content)"
             :labelFit="FitMode.Wrap"
             :labelTrimMode="TrimMode.End"
             :labelForceWordBreak="false"
             :labelBackground="false"
             :labelFontSize="10"
             :labelMaxWidth="15"
-            :subLabel
+            :subLabel="(n: node) => n.value"
+            subLabelColor="var(--color-base-content)"
             :subLabelFontSize="8"
           />
         </VisSingleContainer>
       </div>
+
       <div v-else role="alert" class="alert alert-warning shadow-lg">
         <TriangleAlertIcon />
         <div>
