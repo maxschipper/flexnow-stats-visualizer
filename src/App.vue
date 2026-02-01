@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ChartGroupedBar from "./components/Chart/ChartGroupedBar.vue";
 import ChartSankey from "./components/Chart/ChartSankey.vue";
 import ChartScatter from "./components/Chart/ChartScatter.vue";
 import Hero from "./components/Hero.vue";
@@ -17,6 +18,7 @@ const { lectures } = useLectures();
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-8 xl:grid-cols-3 xl:px-16">
         <ChartScatter />
         <ChartSankey />
+        <ChartGroupedBar />
       </div>
     </div>
   </div>
