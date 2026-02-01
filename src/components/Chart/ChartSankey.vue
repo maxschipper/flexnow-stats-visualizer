@@ -43,10 +43,10 @@ const chartData = computed(() => {
 
   // all the stats needed to generate the sankey diagram
   if (
-    stats.participants === null ||
-    stats.other === null ||
-    stats.passed === null ||
-    stats.graded_but_not_passed === null
+    stats.participants === null
+    || stats.other === null
+    || stats.passed === null
+    || stats.graded_but_not_passed === null
   ) {
     return null;
   }

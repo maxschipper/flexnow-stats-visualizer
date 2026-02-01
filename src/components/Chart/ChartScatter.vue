@@ -12,9 +12,9 @@ const mydata = computed(() =>
   lectures.value
     .flatMap((lec) => {
       if (
-        lec.stats === null ||
-        lec.stats.graded === null ||
-        lec.stats.graded_but_not_passed === null
+        lec.stats === null
+        || lec.stats.graded === null
+        || lec.stats.graded_but_not_passed === null
       )
         return null;
       return [
