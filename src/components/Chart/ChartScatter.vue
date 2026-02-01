@@ -55,7 +55,7 @@ const template = (d: any) => `
 <template>
   <ChartCard heading="Performance vs. Difficulty Matrix">
     <div class="pr-6">
-      <VisXYContainer :data="mydata" :height="350" class="">
+      <VisXYContainer :data="mydata" :height="390" class="">
         <!-- chart -->
         <VisScatter :x="x" :y="y" :size :sizeRange="[10, 50]" :label />
         <!-- axis (order here affects x and y???) -->
