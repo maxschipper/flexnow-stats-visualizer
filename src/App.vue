@@ -13,7 +13,7 @@ const { lectures } = useLectures();
   <Hero v-if="lectures.length === 0" />
   <!-- <div v-else class="p-4"> -->
   <div v-else>
-    <Navbar class="mb-4" />
+    <Navbar />
     <div class="container max-w-full px-2">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-8 xl:grid-cols-3 xl:px-16">
         <ChartScatter />

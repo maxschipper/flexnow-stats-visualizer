@@ -14,9 +14,9 @@ const openModal = () => modalRef.value?.showModal();
 // const closeModal = () => modalRef.value?.close();
 </script>
 <template>
-  <div class="navbar bg-base-100 gap-5 shadow-sm">
+  <div class="navbar bg-base-100 gap-5">
     <div class="flex-1">
-      <a class="btn btn-ghost text-xl">StatsVisu</a>
+      <a class="btn btn-ghost text-xl">FlexNow Charts</a>
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal items-center gap-0 px-1">
