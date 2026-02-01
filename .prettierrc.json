@@ -5,6 +5,7 @@
     "prettier-plugin-tailwindcss"
   ],
   "printWidth": 100,
+  "experimentalOperatorPosition": "start",
   "importOrder": ["<THIRD_PARTY_MODULES>", "^@/|^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
