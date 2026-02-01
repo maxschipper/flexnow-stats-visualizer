@@ -74,9 +74,9 @@ textarea {
   prefersdark: false;
   color-scheme: "light";
 
-  --color-base-300: oklch(100% 0 0);
-  --color-base-200: oklch(96% 0 0);
   --color-base-100: oklch(92% 0 0);
+  --color-base-200: oklch(96% 0 0);
+  --color-base-300: oklch(100% 0 0);
 
   --color-base-content: oklch(22.389% 0.031 278.072);
 
@@ -109,4 +109,42 @@ textarea {
 
   --depth: 0;
   --noise: 0;
+}
+
+:root {
+  --vis-font-family: Inter, Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --vis-color-main: #4d8cfd;
+  --vis-color-main-light: #d0e0fe;
+  --vis-color-main-dark: #3c588a;
+  --vis-color-grey: #2a2a2a;
+
+  --vis-axis-grid-color: color-mix(in oklch, var(--color-base-content), transparent 90%);
+  --vis-axis-tick-color: color-mix(in oklch, var(--color-base-content), transparent 80%);
+
+  --vis-text-color: var(--color-base-content);
+  --vis-dark-text-color: var(--color-base-content); /* For safety in some charts */
+
+  --vis-tooltip-background-color: color-mix(in oklch, var(--color-base-100), transparent 10%);
+  --vis-tooltip-text-color: var(--color-base-content);
+  --vis-tooltip-border-color: var(--color-base-300);
+
+  --vis-crosshair-line-stroke-color: color-mix(
+    in oklch,
+    var(--color-base-content),
+    transparent 50%
+  );
+
+  --vis-color0: #4d8cfd;
+  --vis-color1: #ff6b7e;
+  --vis-color2: #f4b83e;
+  --vis-color3: #a6cc74;
+  --vis-color4: #00c19a;
+  --vis-color5: #6859be;
+
+  --vis-dark-color0: #4d8cfd;
+  --vis-dark-color1: #ff6b7e;
+  --vis-dark-color2: #ffc16d;
+  --vis-dark-color3: #a6cc74;
+  --vis-dark-color4: #00c19a;
+  --vis-dark-color5: #7887e0;
 }
