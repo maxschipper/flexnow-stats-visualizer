@@ -4,6 +4,7 @@ import ChartBarDeviation from "./components/Chart/ChartBarDeviation.vue";
 import ChartGroupBarMeVsMedian from "./components/Chart/ChartGroupBarMeVsMedian.vue";
 import ChartSankeySurvivorFlow from "./components/Chart/ChartSankeySurvivorFlow.vue";
 import ChartScatterPerfVsDiff from "./components/Chart/ChartScatterPerfVsDiff.vue";
+import ChartScatterStrictVsConsist from "./components/Chart/ChartScatterStrictVsConsist.vue";
 import Hero from "./components/Hero.vue";
 import Navbar from "./components/Navbar.vue";
 import { useLectures } from "./composables/useLectures";
@@ -25,6 +26,7 @@ const { lectures } = useLectures();
         <ChartGroupBarMeVsMedian />
         <ChartAreaNormDist />
         <ChartBarDeviation />
+        <ChartScatterStrictVsConsist />
       </div>
     </div>
   </div>
