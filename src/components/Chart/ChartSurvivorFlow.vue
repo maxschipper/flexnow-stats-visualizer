@@ -22,24 +22,31 @@ import LectureSelector from "../LectureSelector.vue";
 import ChartCard from "./ChartCard.vue";
 import type { ExamStats, Lecture } from "@/types";
 
-interface node {
+interface Node {
   id: string;
   label: string;
   value: number;
   color?: string;
 }
-interface link {
-  source: node;
-  target: node;
+interface Link {
+  source: Node | string;
+  target: Node | string;
+  color?: string;
+}
+interface SankeyData {
+  nodes: Node[];
+  links: Link[];
 }
 
 // used for the v-model on LectureSelector
 const selectedLecture = ref<Lecture | null>(null);
 
-const chartData = computed(() => {
+const chartData = computed((): SankeyData | null => {
   if (!selectedLecture.value) return null;
-  if (selectedLecture.value.stats === null) return null;
-  const stats: ExamStats = selectedLecture.value.stats;
+  const lec = selectedLecture.value;
+
+  if (lec.stats === null) return null;
+  const stats: ExamStats = lec.stats;
 
   // all the stats needed to generate the sankey diagram
   if (
@@ -66,8 +73,16 @@ const chartData = computed(() => {
     links: [
       { source: "root", target: "no_show" },
       { source: "root", target: "showed_up" },
-      { source: "showed_up", target: "passed" },
-      { source: "showed_up", target: "failed" },
+      {
+        source: "showed_up",
+        target: "passed",
+        color: lec.passed ? "color-mix(in oklch, var(--color-success), transparent 80%)" : "",
+      },
+      {
+        source: "showed_up",
+        target: "failed",
+        color: !lec.passed ? "color-mix(in oklch, var(--color-error), transparent 80%)" : "",
+      },
     ],
   };
 });
@@ -81,13 +96,13 @@ const sortOrder: Record<string, number> = {
   failed: 4,
 };
 
-const linkSort = (link1: link, link2: link) => {
-  const order1 = sortOrder[link1.target.id] ?? 99;
-  const order2 = sortOrder[link2.target.id] ?? 99;
+const linkSort = (link1: Link, link2: Link) => {
+  const order1 = sortOrder[(link1.target as Node).id] ?? 99;
+  const order2 = sortOrder[(link2.target as Node).id] ?? 99;
   return order1 - order2;
 };
 
-const nodeColor = (n: node) => {
+const nodeColor = (n: Node) => {
   switch (n.id) {
     case "passed":
       return "var(--color-success)";
@@ -110,7 +125,8 @@ const nodeColor = (n: node) => {
             :nodeColor
             :nodePadding="30"
             :linkSort
-            :linkValue="(l: link) => l.target.value"
+            :linkValue="(l: Link) => (l.target as Node).value"
+            :linkColor="(l: Link) => l.color"
             labelColor="var(--color-base-content)"
             :labelFit="FitMode.Wrap"
             :labelTrimMode="TrimMode.End"
@@ -118,9 +134,10 @@ const nodeColor = (n: node) => {
             :labelBackground="false"
             :labelFontSize="10"
             :labelMaxWidth="15"
-            :subLabel="(n: node) => n.value"
+            :subLabel="(n: Node) => n.value"
             subLabelColor="var(--color-base-content)"
             :subLabelFontSize="8"
+            :highlightSubtreeOnHover="true"
           />
         </VisSingleContainer>
       </div>
