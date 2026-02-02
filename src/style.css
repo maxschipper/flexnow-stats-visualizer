@@ -124,9 +124,9 @@ textarea {
   --vis-text-color: var(--color-base-content);
   --vis-dark-text-color: var(--color-base-content); /* For safety in some charts */
 
-  --vis-tooltip-background-color: color-mix(in oklch, var(--color-base-100), transparent 10%);
+  --vis-tooltip-background-color: color-mix(in oklch, var(--color-base-100), transparent 5%);
   --vis-tooltip-text-color: var(--color-base-content);
-  --vis-tooltip-border-color: var(--color-base-300);
+  --vis-tooltip-border-color: var(--color-base-200);
 
   --vis-crosshair-line-stroke-color: color-mix(
     in oklch,
