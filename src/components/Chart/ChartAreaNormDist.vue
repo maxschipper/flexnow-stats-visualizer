@@ -41,7 +41,7 @@ const plotlineValue = computed(() => (selectedLecture.value ? selectedLecture.va
 </script>
 <template>
   <ChartCard heading="Normal Distribution" class="relative">
-    <div class="tooltip absolute top-4 right-4">
+    <div class="tooltip tooltip-left absolute top-4 right-4">
       <div class="tooltip-content px-2.5 py-1.5 text-left">
         This chart represents a theoretical normal distribution based on the mean and standard
         deviation. It is an approximation for visualization purposes and may not perfectly reflect
