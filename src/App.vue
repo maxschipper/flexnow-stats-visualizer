@@ -16,8 +16,10 @@ const { lectures } = useLectures();
   <!-- <div v-else class="p-4"> -->
   <div v-else>
     <Navbar />
-    <div class="container max-w-full px-2">
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-8 xl:grid-cols-3 xl:px-16">
+    <div class="container max-w-full">
+      <div
+        class="grid grid-cols-1 gap-4 px-2 pb-32 md:grid-cols-2 md:px-8 md:pb-8 xl:grid-cols-3 xl:px-16 xl:pb-16"
+      >
         <ChartPerfVsDiff />
         <ChartSurvivorFlow />
         <ChartMeVsMedian />

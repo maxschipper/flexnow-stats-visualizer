@@ -14,7 +14,7 @@ const openModal = () => modalRef.value?.showModal();
 // const closeModal = () => modalRef.value?.close();
 </script>
 <template>
-  <div class="navbar bg-base-100 gap-5">
+  <div class="navbar bg-base-100/95 top-0 gap-5 md:sticky md:z-50 md:mb-8 md:shadow-md">
     <div class="flex-1">
       <a class="btn btn-ghost text-xl">FlexNow Charts</a>
     </div>
