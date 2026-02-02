@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ChartDeviation from "./components/Chart/ChartDeviation.vue";
 import ChartMeVsMedian from "./components/Chart/ChartMeVsMedian.vue";
 import ChartNormDist from "./components/Chart/ChartNormDist.vue";
 import ChartPerfVsDiff from "./components/Chart/ChartPerfVsDiff.vue";
@@ -21,6 +22,7 @@ const { lectures } = useLectures();
         <ChartSurvivorFlow />
         <ChartMeVsMedian />
         <ChartNormDist />
+        <ChartDeviation />
       </div>
     </div>
   </div>
