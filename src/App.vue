@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import ChartArea from "./components/Chart/ChartArea.vue";
-import ChartGroupedBar from "./components/Chart/ChartGroupedBar.vue";
-import ChartSankey from "./components/Chart/ChartSankey.vue";
-import ChartScatter from "./components/Chart/ChartScatter.vue";
+import ChartMeVsMedian from "./components/Chart/ChartMeVsMedian.vue";
+import ChartNormDist from "./components/Chart/ChartNormDist.vue";
+import ChartPerfVsDiff from "./components/Chart/ChartPerfVsDiff.vue";
+import ChartSurvivorFlow from "./components/Chart/ChartSurvivorFlow.vue";
 import Hero from "./components/Hero.vue";
 import Navbar from "./components/Navbar.vue";
 import { useLectures } from "./composables/useLectures";
@@ -17,10 +17,10 @@ const { lectures } = useLectures();
     <Navbar />
     <div class="container max-w-full px-2">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-8 xl:grid-cols-3 xl:px-16">
-        <ChartScatter />
-        <ChartSankey />
-        <ChartGroupedBar />
-        <ChartArea />
+        <ChartPerfVsDiff />
+        <ChartSurvivorFlow />
+        <ChartMeVsMedian />
+        <ChartNormDist />
       </div>
     </div>
   </div>
