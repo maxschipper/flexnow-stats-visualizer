@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { VisArea, VisAxis, VisPlotline, VisXYContainer } from "@unovis/vue";
-import { InfoIcon } from "lucide-vue-next";
 import { computed, ref } from "vue";
 
+import { InfoIcon } from "lucide-vue-next";
+
+import { VisArea, VisAxis, VisPlotline, VisXYContainer } from "@unovis/vue";
 import LectureSelector from "../LectureSelector.vue";
 import ChartCard from "./ChartCard.vue";
+
 import type { Lecture } from "@/types";
 
 const selectedLecture = ref<Lecture | null>(null);

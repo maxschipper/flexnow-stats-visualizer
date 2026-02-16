@@ -15,10 +15,12 @@
 export default {};
 </script>
 <script setup lang="ts">
-import { InfoIcon } from "lucide-vue-next";
 import { watch } from "vue";
 
+import { InfoIcon } from "lucide-vue-next";
+
 import { useLectures } from "@/composables/useLectures";
+
 import type { Lecture } from "@/types";
 
 const { lectures } = useLectures();

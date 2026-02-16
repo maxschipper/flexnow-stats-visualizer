@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { type BulletLegendItemInterface, GroupedBar } from "@unovis/ts";
-import { VisAxis, VisBulletLegend, VisGroupedBar, VisTooltip, VisXYContainer } from "@unovis/vue";
 import { computed } from "vue";
 
-import ChartCard from "./ChartCard.vue";
 import { useLectures } from "@/composables/useLectures";
+import { GroupedBar } from "@unovis/ts";
+import { VisAxis, VisBulletLegend, VisGroupedBar, VisTooltip, VisXYContainer } from "@unovis/vue";
+import ChartCard from "./ChartCard.vue";
+
+import type { BulletLegendItemInterface } from "@unovis/ts";
 
 const { lectures } = useLectures();
 

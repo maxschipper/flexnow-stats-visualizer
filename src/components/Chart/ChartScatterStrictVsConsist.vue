@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { colors } from "@unovis/ts";
-import { Scatter } from "@unovis/ts";
-import { VisAxis, VisScatter, VisTooltip, VisXYContainer } from "@unovis/vue";
-import { InfoIcon } from "lucide-vue-next";
 import { computed } from "vue";
 
-import ChartCard from "./ChartCard.vue";
+import { InfoIcon } from "lucide-vue-next";
+
 import { useLectures } from "@/composables/useLectures";
+import { colors, Scatter } from "@unovis/ts";
+import { VisAxis, VisScatter, VisTooltip, VisXYContainer } from "@unovis/vue";
+import ChartCard from "./ChartCard.vue";
 
 const { lectures } = useLectures();
 

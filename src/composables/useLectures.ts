@@ -4,6 +4,7 @@
 import { readonly, ref } from "vue";
 
 import rawDemoData from "@/assets/exampleData.json";
+
 import type { Lecture } from "@/types";
 
 const lectures = ref<Lecture[]>([]);

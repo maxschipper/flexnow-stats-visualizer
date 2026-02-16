@@ -7,9 +7,10 @@ export default {};
 <script setup lang="ts">
 import { ref } from "vue";
 
-import { useLectures } from "@/composables/useLectures";
-import type { Lecture } from "@/types";
 import { extractLecturesFromHtml } from "@/utils/parser";
+import { useLectures } from "@/composables/useLectures";
+
+import type { Lecture } from "@/types";
 
 const { setLectures, loadDemoData } = useLectures();
 

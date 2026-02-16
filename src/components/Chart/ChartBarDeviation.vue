@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { StackedBar } from "@unovis/ts";
-import { VisAxis, VisStackedBar, VisTooltip, VisXYContainer } from "@unovis/vue";
 import { computed } from "vue";
 
-import ChartCard from "./ChartCard.vue";
 import { useLectures } from "@/composables/useLectures";
+import { StackedBar } from "@unovis/ts";
+import { VisAxis, VisStackedBar, VisTooltip, VisXYContainer } from "@unovis/vue";
+import ChartCard from "./ChartCard.vue";
 
 const { lectures } = useLectures();
 

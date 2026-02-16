@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { colors } from "@unovis/ts";
-import { VisAxis, VisCrosshair, VisScatter, VisTooltip, VisXYContainer } from "@unovis/vue";
 import { computed } from "vue";
 
-import ChartCard from "./ChartCard.vue";
 import { useLectures } from "@/composables/useLectures";
+import { colors } from "@unovis/ts";
+import { VisAxis, VisCrosshair, VisScatter, VisTooltip, VisXYContainer } from "@unovis/vue";
+import ChartCard from "./ChartCard.vue";
 
 const { lectures } = useLectures();
 

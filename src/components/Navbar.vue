@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { RotateCcwIcon } from "lucide-vue-next";
-import { MoonIcon, SunIcon } from "lucide-vue-next";
 import { ref } from "vue";
 
-import Debug from "./Debug.vue";
-import Details from "./Details.vue";
+import { MoonIcon, RotateCcwIcon, SunIcon } from "lucide-vue-next";
+
 import { useLectures } from "@/composables/useLectures";
+import Debug from "@/components/Debug.vue";
+import Details from "@/components/Details.vue";
 
 const { clearLectures } = useLectures();
 const modalRef = ref<HTMLDialogElement | null>(null);

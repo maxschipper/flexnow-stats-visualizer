@@ -9,13 +9,15 @@
 export default {};
 </script>
 <script setup lang="ts">
-import { FitMode, SankeyNodeAlign, TrimMode } from "@unovis/ts";
-import { VisSankey, VisSingleContainer } from "@unovis/vue";
-import { TriangleAlertIcon } from "lucide-vue-next";
 import { computed, ref } from "vue";
 
+import { TriangleAlertIcon } from "lucide-vue-next";
+
+import { FitMode, SankeyNodeAlign, TrimMode } from "@unovis/ts";
+import { VisSankey, VisSingleContainer } from "@unovis/vue";
 import LectureSelector from "../LectureSelector.vue";
 import ChartCard from "./ChartCard.vue";
+
 import type { ExamStats, Lecture } from "@/types";
 
 interface Node {
