@@ -1,6 +1,6 @@
 <script lang="ts">
 /**
- * renders a list of lectures as formatted JSON
+ * renders the lectures as formatted JSON
  */
 export default {};
 </script>

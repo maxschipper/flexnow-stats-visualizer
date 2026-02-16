@@ -1,8 +1,6 @@
 <script lang="ts">
 /**
  * HTML file input to upload the file "`FlexNow Studentenschnittstelle.html`"
- *
- * @emits lectures-loaded - propagates the new `Lecture[]` list  - this needs to call a function that will replace the old lecture data with this new data
  */
 export default {};
 </script>

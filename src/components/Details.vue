@@ -1,7 +1,6 @@
 <script lang="ts">
 /**
- * renders a list of lectures as formatted JSON
- * @prop {Lecture[]} lectures - the lectures to render
+ * renders the lectures as as a collapsable list
  */
 export default {};
 </script>

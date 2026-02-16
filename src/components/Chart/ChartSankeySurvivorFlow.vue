@@ -1,18 +1,14 @@
+<!-- TODO: are people in other strictly no shows or maybe also people handing in empty? -->
 <script lang="ts">
 /**
  * Sankey Diagram Visualization
- * Displays the flow of student participation for a specific exam:
- * Signed Up -> (Showed Up vs No Show) and then: Showed Up -> (Passed vs Failed)
  *
  * Includes an internal `LectureSelector` to switch between exams.
  * Handles error states if the selected lecture has incomplete data.
- *
- * @prop {Lecture[]} lectures - The list of lectures available to visualize.
  */
 export default {};
 </script>
 <script setup lang="ts">
-// TODO: are people in other strictly no shows or maybe also people handing in empty?
 import { FitMode, SankeyNodeAlign, TrimMode } from "@unovis/ts";
 import { VisSankey, VisSingleContainer } from "@unovis/vue";
 import { TriangleAlertIcon } from "lucide-vue-next";

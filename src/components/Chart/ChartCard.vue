@@ -1,3 +1,13 @@
+<script lang="ts">
+/**
+ * Simple card component for the charts.
+ * Wrap every chart with this card component.
+ *
+ * @prop {string} heading - The heading for the card.
+ */
+export default {};
+</script>
+
 <script setup lang="ts">
 const { heading = "missing heading prop" } = defineProps<{ heading: string }>();
 </script>

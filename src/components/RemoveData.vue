@@ -1,6 +1,6 @@
 <script lang="ts">
 /**
- *
+ * Simple button to remove the lectures data.
  */
 export default {};
 </script>
