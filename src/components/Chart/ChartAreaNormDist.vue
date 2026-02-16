@@ -18,8 +18,6 @@ function calculateNormalPDF(grade: number, mean: number, stdDeviation: number): 
 }
 
 const chartData = computed(() => {
-  // const grades = [1, 2, 3, 4, 5];
-  // const grades = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
   const grades = [];
   for (let i = 1; i <= 5.1; i += 0.2) {
     grades.push(i);
@@ -51,7 +49,6 @@ const plotlineValue = computed(() => (selectedLecture.value ? selectedLecture.va
     </div>
     <VisXYContainer :data="chartData">
       <VisArea :x :y :opacity="0.4" />
-      <!-- <VisArea :x :y  curveType="step" :opacity="0.3" /> -->
       <VisAxis type="x" :gridLine="false" label="Grade" :tickValues="[1, 2, 3, 4, 5]" />
       <VisAxis type="y" :gridLine="false" label="Probability" />
       <VisPlotline
@@ -65,10 +62,5 @@ const plotlineValue = computed(() => (selectedLecture.value ? selectedLecture.va
       />
     </VisXYContainer>
     <LectureSelector v-model:selectedLecture="selectedLecture" />
-    <!-- <div class="text-base-content/70 textarea-xs flex items-center gap-1">
-      <InfoIcon :size="14" />
-      This chart represents a theoretical normal distribution based on the mean and standard
-      deviation
-    </div> -->
   </ChartCard>
 </template>

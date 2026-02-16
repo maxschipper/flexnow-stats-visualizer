@@ -11,8 +11,8 @@ const { clearLectures } = useLectures();
 const modalRef = ref<HTMLDialogElement | null>(null);
 
 const openModal = () => modalRef.value?.showModal();
-// const closeModal = () => modalRef.value?.close();
 </script>
+
 <template>
   <div class="navbar bg-base-100/95 top-0 gap-5 md:sticky md:z-50 md:mb-8 md:shadow-md">
     <div class="flex-1">
@@ -35,9 +35,6 @@ const openModal = () => modalRef.value?.showModal();
           <Teleport to="body">
             <dialog ref="modalRef" class="modal modal-center">
               <div class="modal-box">
-                <!-- <form method="dialog">
-                  <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
-                </form> -->
                 <div class="flex flex-col gap-4">
                   <h3 class="font-semibold">Inspect your parsed data</h3>
                   <Details />

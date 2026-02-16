@@ -5,7 +5,6 @@ import FileInput from "./FileInput.vue";
 </script>
 
 <template>
-  <!-- <div class="hero bg-base-200 min-h-screen"> -->
   <div class="hero min-h-dvh">
     <div class="hero-content flex-col lg:flex-row-reverse">
       <div class="text-center lg:text-left">
@@ -21,13 +20,9 @@ import FileInput from "./FileInput.vue";
           <div class="text-base-content/50 flex items-center gap-2 text-xs">
             <div class="badge badge-accent text-accent-content">
               <CloudOffIcon :size="16" />
-              <!-- <ShieldCheckIcon :size="16" /> -->
-              <!-- <LockKeyholeIcon :size="16" /> -->
-              <!-- <FileLockIcon :size="16" /> -->
-              <!-- <GlobeXIcon :size="16" /> -->
             </div>
             Processed locally in your browser.
-            <!-- Processed locally in your browser. No data leaves your device. -->
+            <!-- No data leaves your device. -->
           </div>
         </div>
       </div>

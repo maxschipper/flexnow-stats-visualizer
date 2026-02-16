@@ -70,6 +70,7 @@ const tooltipTriggers = {
           :label="(d: any) => d.id"
           :color="(d: any) => d.color"
         />
+
         <!-- axis (order here affects x and y???) -->
         <VisAxis type="y" label="Standard Deviation" />
         <VisAxis type="x" label="Average Grade" :gridLine="true" :tickValues="[1, 2, 3, 4, 5]" />

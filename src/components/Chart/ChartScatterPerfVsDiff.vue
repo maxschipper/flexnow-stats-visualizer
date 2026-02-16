@@ -28,16 +28,6 @@ const mydata = computed(() => {
   }));
 });
 
-// import { Scatter } from "@unovis/ts";
-// const tooltipTriggers = {
-//     [Scatter.selectors.point]: (d: any) => `
-//     <div class="font-bold">${d.title}</div>
-//     <div>Grade: ${d.performance}</div>
-//     <div>Fail Rate: ${(d.difficulty * 100).toFixed(1)}%</div>
-//     <div class="text-xs text-gray-400">${d.participants} Students</div>
-//   `,
-// };
-
 const tooltipTemplate = (d: any) => `
   <div class="font-bold">${d.title}</div>
   <div>Grade: ${d.performance}</div>
@@ -50,7 +40,6 @@ const tooltipTemplate = (d: any) => `
   <ChartCard heading="Performance vs. Difficulty Matrix">
     <div class="pr-6">
       <VisXYContainer :data="mydata" :height="390" class="">
-        <!-- chart -->
         <VisScatter
           :x="(d: any) => d.difficulty"
           :y="(d: any) => d.performance"
@@ -59,7 +48,7 @@ const tooltipTemplate = (d: any) => `
           :label="(d: any) => d.id"
           :color="(d: any) => d.color"
         />
-        <!-- axis (order here affects x and y???) -->
+
         <VisAxis type="y" label="My grade" :tickValues="[1, 2, 3, 4, 5]" />
         <VisAxis
           type="x"
@@ -72,9 +61,6 @@ const tooltipTemplate = (d: any) => `
         <!-- tooltip -->
         <VisCrosshair :template="tooltipTemplate" />
         <VisTooltip />
-
-        <!-- <VisCrosshair /> -->
-        <!-- <VisTooltip :triggers="tooltipTriggers" :hideDelay="0" />  -->
       </VisXYContainer>
     </div>
   </ChartCard>

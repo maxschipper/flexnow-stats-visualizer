@@ -29,8 +29,6 @@ const legendItems: BulletLegendItemInterface[] = [
   { name: "Average" },
 ];
 
-// const color = (_: any, i: number) => ["#3B82F6", "#A855F7", "#9CA3AF"][i];
-
 const tooltipTriggers = {
   [GroupedBar.selectors.barGroup]: (d: any) => `
     <div class="font-bold">${d.fullName}</div>

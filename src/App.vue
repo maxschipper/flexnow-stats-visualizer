@@ -14,7 +14,6 @@ const { lectures } = useLectures();
 
 <template class="bg-base-100">
   <Hero v-if="lectures.length === 0" />
-  <!-- <div v-else class="p-4"> -->
   <div v-else>
     <Navbar />
     <div class="container max-w-full">
