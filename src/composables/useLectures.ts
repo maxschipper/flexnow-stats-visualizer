@@ -1,4 +1,7 @@
-import { ref } from "vue";
+/**
+ * Global store for shared state for lectures.
+ */
+import { readonly, ref } from "vue";
 
 import rawDemoData from "@/assets/exampleData.json";
 import type { Lecture } from "@/types";
@@ -19,7 +22,7 @@ export function useLectures() {
   };
 
   return {
-    lectures,
+    lectures: readonly(lectures),
     setLectures,
     clearLectures,
     loadDemoData,
