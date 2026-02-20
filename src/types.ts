@@ -1,4 +1,4 @@
-export interface ExamStats {
+export type ExamStats = {
   participants: number | null;
   not_yet_graded: number | null;
   graded: number | null;
@@ -9,10 +9,10 @@ export interface ExamStats {
   median_grade: number | null;
   standard_deviation_grade: number | null;
   average_points: number | null;
-}
+};
 
 // TODO: maybe add attemps object?
-export interface Lecture {
+export type Lecture = {
   id: string;
   name: string | null;
   grade: number | null;
@@ -20,9 +20,4 @@ export interface Lecture {
   passed: boolean | null;
   ects: number | null;
   stats: ExamStats | null;
-}
-
-// export interface FlexNowData {
-//   lectures: Lecture[];
-//   otherData: null;
-// }
+};
