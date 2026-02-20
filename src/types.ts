@@ -11,7 +11,7 @@ export type ExamStats = {
   average_points: number | null;
 };
 
-// TODO: maybe add attemps object?
+// TODO: maybe add attempts object?
 export type Lecture = {
   id: string;
   name: string | null;
